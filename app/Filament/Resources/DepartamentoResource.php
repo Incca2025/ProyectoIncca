@@ -19,9 +19,11 @@ class DepartamentoResource extends Resource
 
     protected static ?string $navigationLabel = 'Departamentos';
 
+    protected static ?string $modelLabel = 'Departamentos';
+
     protected static ?string $navigationGroup = 'País/Departamento/Municipio';
 
-    protected static ?int $navigationSort = 21;
+    protected static ?int $navigationSort = 24;
 
     protected static ?string $navigationIcon = 'heroicon-o-building-office';
 
@@ -30,12 +32,12 @@ class DepartamentoResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('CodDepartamento')
-                    ->label('Código')
+                    ->label('Código del Departamento')
                     ->required()
                     ->unique()
                     ->maxLength(5),
                 Forms\Components\TextInput::make('DesDepartamento')
-                    ->label('Departamento')
+                    ->label('Nombre del Departamento')
                     ->required()
                     ->maxLength(45),
                 Forms\Components\Select::make('IdTipPais')
@@ -55,6 +57,7 @@ class DepartamentoResource extends Resource
                     ->label('Departamento')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('pais.DesPais')
+                    ->label('País')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Creado el')

@@ -19,9 +19,11 @@ class DiscapacidadResource extends Resource
     
     protected static ?string $navigationLabel = 'Discapacidades';
 
+    protected static ?string $modelLabel = 'Discapacidades';
+
     protected static ?string $navigationGroup = 'Datos';
 
-    protected static ?int $navigationSort = 11;
+    protected static ?int $navigationSort = 14;
 
     protected static ?string $navigationIcon = 'heroicon-o-bell-slash';
 

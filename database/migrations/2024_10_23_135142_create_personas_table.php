@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('personas', function (Blueprint $table) {
             $table->id('IdPersona');
             $table->string('NumDocIdentidad', 45)->unique();
-            $table->integer('NumDocIdentidad_Num')->nullable();
+            $table->integer('NumDocIdentidad_Num')->unique()->nullable();
             $table->foreignId('IdTipDocIdentidad')->constrained('tipdocidentidad', 'IdTipDocIdentidad');
             $table->string('PriApellido', 45);
             $table->string('SegApellido', 45)->nullable();

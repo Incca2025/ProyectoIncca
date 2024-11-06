@@ -19,9 +19,11 @@ class EstratoResource extends Resource
     
     protected static ?string $navigationLabel = 'Estratos';
 
+    protected static ?string $modelLabel = 'Estratos';
+    
     protected static ?string $navigationGroup = 'Datos';
 
-    protected static ?int $navigationSort = 13;
+    protected static ?int $navigationSort = 16;
 
     protected static ?string $navigationIcon = 'heroicon-o-currency-dollar';
 

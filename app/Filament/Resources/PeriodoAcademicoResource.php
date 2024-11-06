@@ -19,6 +19,8 @@ class PeriodoAcademicoResource extends Resource
     
     protected static ?string $navigationLabel = 'Periodos Académicos';
 
+    protected static ?string $modelLabel = 'Periodos Académicos';
+
     protected static ?string $navigationGroup = 'Académicos';
 
     protected static ?int $navigationSort = 7;

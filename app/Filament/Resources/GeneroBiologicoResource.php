@@ -19,9 +19,11 @@ class GeneroBiologicoResource extends Resource
 
     protected static ?string $navigationLabel = 'Géneros Biológicos';
 
+    protected static ?string $modelLabel = 'Géneros Biológicos';
+
     protected static ?string $navigationGroup = 'Datos';
 
-    protected static ?int $navigationSort = 14;
+    protected static ?int $navigationSort = 17;
 
     protected static ?string $navigationIcon = 'heroicon-o-hand-thumb-up';
 

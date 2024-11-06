@@ -19,6 +19,8 @@ class NivelProgramaResource extends Resource
 
     protected static ?string $navigationLabel = 'Nivel Programas Académicos';
 
+    protected static ?string $modelLabel = 'Nivel Programas Académicos';
+
     protected static ?string $navigationGroup = 'Académicos';
 
     protected static ?int $navigationSort = 6;

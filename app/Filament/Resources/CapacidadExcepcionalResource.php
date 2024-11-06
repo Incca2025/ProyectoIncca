@@ -18,9 +18,11 @@ class CapacidadExcepcionalResource extends Resource
     protected static ?string $model = CapacidadExcepcional::class;
     protected static ?string $navigationLabel = 'Capacidades Excepcionales';
 
+    protected static ?string $modelLabel = 'Capacidades Excepcionales';
+
     protected static ?string $navigationGroup = 'Datos';
 
-    protected static ?int $navigationSort = 8;
+    protected static ?int $navigationSort = 11;
 
     protected static ?string $navigationIcon = 'heroicon-o-rocket-launch';
 

@@ -2,16 +2,19 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\InteresadoResource\Pages;
-use App\Filament\Resources\InteresadoResource\RelationManagers;
-use App\Models\Interesado;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Forms\Form;
+use App\Models\Interesado;
 use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Filament\Tables\Actions\Action;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\InteresadoResource\Pages;
+use App\Filament\Resources\InteresadoResource\RelationManagers;
+use App\Filament\Resources\InteresadoResource\RelationManagers\SeguimientosRelationManager;
+use Filament\Tables\Enums\ActionsPosition;
 
 class InteresadoResource extends Resource
 {
@@ -30,22 +33,27 @@ class InteresadoResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('Nombres_Int')
+                    ->label('Nombres')
                     ->required()
                     ->maxLength(60),
                 Forms\Components\TextInput::make('Apellidos_Int')
+                    ->label('Apellidos')
                     ->required()
                     ->maxLength(60),
                 Forms\Components\TextInput::make('Email_Int')
+                    ->label('Correo Electrónico')
                     ->email()
                     ->required()
                     ->maxLength(100),
                 Forms\Components\Select::make('IdProgAcademico')
+                    ->label('Programa de interés')
                     ->relationship('programa', 'NomProgAcademico', 
                         function ( Builder $query ) {
                             $query->orderBy( 'IdNivPrograma', 'ASC' );
                         })
                     ->required(),
                 Forms\Components\TextInput::make('Celular_Int')
+                    ->label('Número de Celular')
                     ->required()
                     ->maxLength(15),
                 Forms\Components\TextInput::make('Estado')
@@ -60,22 +68,23 @@ class InteresadoResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('Nombres_Int')
-                    ->label('Nombres del Interesado')
+                    ->label('Nombres')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('Apellidos_Int')
-                    ->label('Apellidos del Interesado')
+                    ->label('Apellidos')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('Email_Int')
-                    ->label('Correo Electrónico del Interesado')
+                    ->label('Correo Electrónico')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('programa.NomProgAcademico')
                     ->label('Programa de interés')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('Celular_Int')
-                    ->label('Celular del Interesado')
+                    ->sortable()
                     ->searchable(),
+                Tables\Columns\TextColumn::make('Celular_Int')
+                    ->label('Número de Celular'),
                 Tables\Columns\TextColumn::make('Estado')
                     ->numeric()
+                    ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Creado el')
@@ -92,8 +101,11 @@ class InteresadoResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
+                Tables\Actions\EditAction::make('Ver Seguimientos')
+                    ->label('Seguimientos')
+                    ->color('primary')
+                    ->icon('heroicon-o-eye'),
+            ], position: ActionsPosition::BeforeColumns)
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
@@ -104,7 +116,7 @@ class InteresadoResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            SeguimientosRelationManager::class
         ];
     }
 

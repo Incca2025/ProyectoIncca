@@ -19,9 +19,11 @@ class ConDiscapacidadResource extends Resource
 
     protected static ?string $navigationLabel = 'Con Discapacidades';
 
+    protected static ?string $modelLabel = 'Con Discapacidades';
+
     protected static ?string $navigationGroup = 'Datos';
 
-    protected static ?int $navigationSort = 10;
+    protected static ?int $navigationSort = 13;
 
     protected static ?string $navigationIcon = 'heroicon-o-document-duplicate';
 

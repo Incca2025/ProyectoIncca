@@ -19,9 +19,11 @@ class MunicipioResource extends Resource
 
     protected static ?string $navigationLabel = 'Municipios';
 
+    protected static ?string $modelLabel = 'Municipios';
+
     protected static ?string $navigationGroup = 'País/Departamento/Municipio';
 
-    protected static ?int $navigationSort = 22;
+    protected static ?int $navigationSort = 25;
 
     protected static ?string $navigationIcon = 'heroicon-o-building-office-2';
 
@@ -30,16 +32,20 @@ class MunicipioResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('CodMunicipio')
+                    ->label('Código del Municipio')
                     ->required()
                     ->unique()
                     ->maxLength(5),
                 Forms\Components\TextInput::make('DesMunicipio')
+                    ->label('Nombre del Municipio')
                     ->required()
                     ->maxLength(45),
                 Forms\Components\Select::make('IdTipPais')
+                    ->label('País')
                     ->relationship('pais', 'DesPais')
                     ->required(),
                 Forms\Components\Select::make('IdTipDepartamento')
+                    ->label('Departamento')
                     ->relationship('departamento', 'DesDepartamento')
                     ->required(),
             ]);

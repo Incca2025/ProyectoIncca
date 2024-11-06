@@ -19,9 +19,11 @@ class ZonaResidenciaResource extends Resource
 
     protected static ?string $navigationLabel = 'Zona Residencias';
 
+    protected static ?string $modelLabel = 'Zona Residencias';
+
     protected static ?string $navigationGroup = 'Datos';
 
-    protected static ?int $navigationSort = 19;
+    protected static ?int $navigationSort = 22;
 
     protected static ?string $navigationIcon = 'heroicon-o-home-modern';
 

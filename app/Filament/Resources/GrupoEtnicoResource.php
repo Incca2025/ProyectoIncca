@@ -19,9 +19,11 @@ class GrupoEtnicoResource extends Resource
 
     protected static ?string $navigationLabel = 'Grupos Étnicos';
 
+    protected static ?string $modelLabel = 'Grupos Étnicos';
+
     protected static ?string $navigationGroup = 'Datos';
 
-    protected static ?int $navigationSort = 15;
+    protected static ?int $navigationSort = 18;
 
     protected static ?string $navigationIcon = 'heroicon-o-globe-americas';
 

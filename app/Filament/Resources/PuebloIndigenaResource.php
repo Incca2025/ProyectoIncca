@@ -19,9 +19,11 @@ class PuebloIndigenaResource extends Resource
 
     protected static ?string $navigationLabel = 'Pueblos Indígenas';
 
+    protected static ?string $modelLabel = 'Pueblos Indígenas';
+
     protected static ?string $navigationGroup = 'Datos';
 
-    protected static ?int $navigationSort = 17;
+    protected static ?int $navigationSort = 20;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 

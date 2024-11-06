@@ -19,9 +19,11 @@ class TipoDocumentoResource extends Resource
 
     protected static ?string $navigationLabel = 'Tipo Documentos';
 
+    protected static ?string $modelLabel = 'Tipo Documentos';
+
     protected static ?string $navigationGroup = 'Datos';
 
-    protected static ?int $navigationSort = 18;
+    protected static ?int $navigationSort = 21;
 
     protected static ?string $navigationIcon = 'heroicon-o-identification';
 

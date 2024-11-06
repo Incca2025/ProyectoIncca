@@ -19,9 +19,11 @@ class EstadoCivilResource extends Resource
 
     protected static ?string $navigationLabel = 'Estados Civiles';
 
+    protected static ?string $modelLabel = 'Estados Civiles';
+
     protected static ?string $navigationGroup = 'Datos';
 
-    protected static ?int $navigationSort = 12;
+    protected static ?int $navigationSort = 15;
 
     protected static ?string $navigationIcon = 'heroicon-o-heart';
 

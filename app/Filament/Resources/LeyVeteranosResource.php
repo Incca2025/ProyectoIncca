@@ -19,9 +19,11 @@ class LeyVeteranosResource extends Resource
 
     protected static ?string $navigationLabel = 'Ley Veteranos';
 
+    protected static ?string $modelLabel = 'Ley Veteranos';
+
     protected static ?string $navigationGroup = 'Datos';
 
-    protected static ?int $navigationSort = 16;
+    protected static ?int $navigationSort = 19;
 
     protected static ?string $navigationIcon = 'heroicon-o-scale';
 

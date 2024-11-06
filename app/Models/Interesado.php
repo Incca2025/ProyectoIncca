@@ -23,5 +23,10 @@ class Interesado extends Model
     {
         return $this->belongsTo(ProgramaAcademico::class, 'IdProgAcademico');
     }
+
+    public function seguimientos()
+    {
+        return $this->hasMany(Seguimiento::class, 'Id_Interesado');
+    }
     
 }

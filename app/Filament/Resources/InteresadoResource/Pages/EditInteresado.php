@@ -4,6 +4,7 @@ namespace App\Filament\Resources\InteresadoResource\Pages;
 
 use App\Filament\Resources\InteresadoResource;
 use Filament\Actions;
+use Filament\Actions\Action;
 use Filament\Resources\Pages\EditRecord;
 
 class EditInteresado extends EditRecord
@@ -13,7 +14,10 @@ class EditInteresado extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            Action::make('Salir')
+                ->url(InteresadoResource::getUrl('index'))
+                ->icon('heroicon-o-arrow-left')
+                ->color('danger'),
         ];
     }
 }

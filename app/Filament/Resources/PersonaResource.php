@@ -24,6 +24,8 @@ class PersonaResource extends Resource
     
     protected static ?string $navigationLabel = 'Personas';
 
+    protected static ?string $modelLabel = 'Personas';
+
     protected static ?string $navigationGroup = 'Personas';
 
     protected static ?int $navigationSort = 2;
@@ -102,10 +104,6 @@ class PersonaResource extends Resource
                     ->live()
                     ->disabled(fn (Get $get) => $get('IdPaisNacimiento') !== '1')
                     ->required(),
-                Forms\Components\TextInput::make('OtroDeptoNacimiento')
-                    ->label('Otro Departamento de Nacimiento')
-                    ->maxLength(45)
-                    ->disabled(fn (Get $get) => !$get('IdPaisNacimiento') || $get('IdPaisNacimiento') === '1'),
                 Forms\Components\Select::make('IdTipMunNacimiento')
                     ->label('Municipio de Nacimiento')
                     ->options(fn (Get $get): Collection => Municipio::query()
@@ -116,6 +114,10 @@ class PersonaResource extends Resource
                     ->live()
                     ->disabled(fn (Get $get) => $get('IdPaisNacimiento') !== '1')
                     ->required(),
+                Forms\Components\TextInput::make('OtroDeptoNacimiento')
+                    ->label('Otro Departamento de Nacimiento')
+                    ->maxLength(45)
+                    ->disabled(fn (Get $get) => !$get('IdPaisNacimiento') || $get('IdPaisNacimiento') === '1'),
                 Forms\Components\TextInput::make('OtroMunNacimiento')
                     ->label('Otro Municipio de Nacimiento')
                     ->maxLength(45)
@@ -141,10 +143,6 @@ class PersonaResource extends Resource
                     ->live()
                     ->disabled(fn (Get $get) => $get('IdPaisResidencia') !== '1')
                     ->required(),
-                Forms\Components\TextInput::make('OtroDeptoResidencia')
-                    ->label('Otro Departamento de Residencia')
-                    ->disabled(fn (Get $get) => !$get('IdPaisResidencia') || $get('IdPaisResidencia') === '1')
-                    ->maxLength(45),
                 Forms\Components\Select::make('IdTipMunResidencia')
                     ->label('Municipio de Residencia')
                     ->options(fn (Get $get): Collection => Municipio::query()
@@ -155,6 +153,10 @@ class PersonaResource extends Resource
                     ->live()
                     ->disabled(fn (Get $get) => $get('IdPaisResidencia') !== '1')
                     ->required(),
+                Forms\Components\TextInput::make('OtroDeptoResidencia')
+                    ->label('Otro Departamento de Residencia')
+                    ->disabled(fn (Get $get) => !$get('IdPaisResidencia') || $get('IdPaisResidencia') === '1')
+                    ->maxLength(45),
                 Forms\Components\TextInput::make('OtroMunResidencia')
                     ->label('Otro Municipio de Residencia')
                     ->disabled(fn (Get $get) => !$get('IdPaisResidencia') || $get('IdPaisResidencia') === '1')
