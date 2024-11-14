@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('inter_seguimientos', function (Blueprint $table) {
             $table->id('IdIntSegumiento');
-            $table->foreignId('Id_Interesado')->constrained('interesado', 'Id_Interesado');
+            $table->foreignId('IdInteresado')->constrained('interesado', 'IdInteresado');
             $table->foreignId('IdIntTipSeguimiento')->constrained('inter_tipseguimiento', 'IdIntTipSeguimiento');
             $table->foreignId('IdIntEstSeguimiento')->constrained('inter_estseguimiento', 'IdIntEstSeguimiento');
             $table->string('ObsIntSeguimiento', 1000);

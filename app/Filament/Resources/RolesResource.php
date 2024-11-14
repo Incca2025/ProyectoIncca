@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ComunidadNegraResource\Pages;
-use App\Filament\Resources\ComunidadNegraResource\RelationManagers;
-use App\Models\ComunidadNegra;
+use App\Filament\Resources\RolesResource\Pages;
+use App\Filament\Resources\RolesResource\RelationManagers;
+use App\Models\Roles;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,33 +13,32 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class ComunidadNegraResource extends Resource
+class RolesResource extends Resource
 {
-    protected static ?string $model = ComunidadNegra::class;
-    
-    protected static ?string $navigationLabel = 'Comunidades Negras';
+    protected static ?string $model = Roles::class;
 
-    protected static ?string $modelLabel = 'Comunidades Negras';
+    protected static ?string $navigationLabel = 'Roles';
 
-    protected static ?string $navigationGroup = 'Datos';
+    protected static ?string $modelLabel = 'Roles';
 
-    protected static ?int $navigationSort = 13;
+    protected static ?string $navigationGroup = 'Personas';
 
-    protected static ?string $navigationIcon = 'heroicon-o-face-smile';
+    protected static ?int $navigationSort = 2;
+
+    protected static ?string $navigationIcon = 'heroicon-o-squares-2x2';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('CodMenCN')
-                    ->label('Código')
+                Forms\Components\TextInput::make('rol')
+                    ->label('Rol')
                     ->required()
-                    ->unique(ignorable: fn ($record) => $record)
-                    ->maxLength(5),
-                Forms\Components\TextInput::make('DesComNegra')
-                    ->label('Comunidad Negra')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('descripcion')
+                    ->label('Descripción')
                     ->required()
-                    ->maxLength(45),
+                    ->maxLength(255),
             ]);
     }
 
@@ -47,11 +46,11 @@ class ComunidadNegraResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('CodMenCN')
-                    ->label('Código')
+                Tables\Columns\TextColumn::make('rol')
+                    ->label('Rol')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('DesComNegra')
-                    ->label('Comunidad Negra')
+                Tables\Columns\TextColumn::make('descripcion')
+                    ->label('Descripción')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Creado el')
@@ -87,9 +86,9 @@ class ComunidadNegraResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListComunidadNegras::route('/'),
-            'create' => Pages\CreateComunidadNegra::route('/create'),
-            'edit' => Pages\EditComunidadNegra::route('/{record}/edit'),
+            'index' => Pages\ListRoles::route('/'),
+            'create' => Pages\CreateRoles::route('/create'),
+            'edit' => Pages\EditRoles::route('/{record}/edit'),
         ];
     }
 }

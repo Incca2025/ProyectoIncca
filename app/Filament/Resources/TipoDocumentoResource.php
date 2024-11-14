@@ -23,7 +23,7 @@ class TipoDocumentoResource extends Resource
 
     protected static ?string $navigationGroup = 'Datos';
 
-    protected static ?int $navigationSort = 21;
+    protected static ?int $navigationSort = 22;
 
     protected static ?string $navigationIcon = 'heroicon-o-identification';
 
@@ -34,7 +34,7 @@ class TipoDocumentoResource extends Resource
                 Forms\Components\TextInput::make('AbreDocIdentidad')
                     ->label('Tipo')
                     ->required()
-                    ->unique()
+                    ->unique(ignorable: fn ($record) => $record)
                     ->maxLength(5),
                 Forms\Components\TextInput::make('DesDocidentidad')
                     ->label('Documento de Identidad')

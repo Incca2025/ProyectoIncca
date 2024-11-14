@@ -13,5 +13,6 @@ class TipoSeguimiento extends Model
     protected $fillable = [
         'DesTipSeguimiento',
         'ActivaMatricula',
+        'InstTipSeguimiento'
     ];
 }

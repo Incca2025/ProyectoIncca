@@ -24,7 +24,7 @@ class InteresadoResource extends Resource
 
     protected static ?string $navigationGroup = 'Personas';
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 5;
 
     protected static ?string $navigationIcon = 'heroicon-o-user';
 
@@ -124,7 +124,7 @@ class InteresadoResource extends Resource
     {
         return [
             'index' => Pages\ListInteresados::route('/'),
-            'create' => Pages\CreateInteresado::route('/create'),
+            // 'create' => Pages\CreateInteresado::route('/create'),
             'edit' => Pages\EditInteresado::route('/{record}/edit'),
         ];
     }

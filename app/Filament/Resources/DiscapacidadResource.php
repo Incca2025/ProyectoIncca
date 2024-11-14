@@ -23,7 +23,7 @@ class DiscapacidadResource extends Resource
 
     protected static ?string $navigationGroup = 'Datos';
 
-    protected static ?int $navigationSort = 14;
+    protected static ?int $navigationSort = 15;
 
     protected static ?string $navigationIcon = 'heroicon-o-bell-slash';
 
@@ -34,7 +34,7 @@ class DiscapacidadResource extends Resource
                 Forms\Components\TextInput::make('CodMenDiscap')
                     ->label('Código')
                     ->required()
-                    ->unique()
+                    ->unique(ignorable: fn ($record) => $record)
                     ->maxLength(5),
                 Forms\Components\TextInput::make('DesDiscapacidad')
                     ->label('Discapacidad')

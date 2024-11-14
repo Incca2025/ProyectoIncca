@@ -8,7 +8,7 @@ class Interesado extends Model
 {
     protected $table = 'interesado';
 
-    protected $primaryKey = 'Id_Interesado';
+    protected $primaryKey = 'IdInteresado';
 
     protected $fillable = [
         'Nombres_Int',
@@ -26,7 +26,7 @@ class Interesado extends Model
 
     public function seguimientos()
     {
-        return $this->hasMany(Seguimiento::class, 'Id_Interesado');
+        return $this->hasMany(Seguimiento::class, 'IdInteresado');
     }
     
 }

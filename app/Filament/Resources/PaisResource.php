@@ -23,7 +23,7 @@ class PaisResource extends Resource
 
     protected static ?string $navigationGroup = 'País/Departamento/Municipio';
 
-    protected static ?int $navigationSort = 23;
+    protected static ?int $navigationSort = 24;
 
     protected static ?string $navigationIcon = 'heroicon-o-flag';
 
@@ -34,7 +34,7 @@ class PaisResource extends Resource
                 Forms\Components\TextInput::make('CodPais')
                     ->label('Código del País')
                     ->required()
-                    ->unique(Pais::class, 'CodPais', fn ($record) => $record ? $record->getKey() : null)
+                    ->unique(ignorable: fn ($record) => $record)
                     ->maxLength(5),
                 Forms\Components\TextInput::make('DesPais')
                     ->label('Nombre del País')

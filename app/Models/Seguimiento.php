@@ -11,7 +11,7 @@ class Seguimiento extends Model
     protected $primaryKey = 'IdIntSegumiento';
 
     protected $fillable = [
-        'Id_Interesado',
+        'IdInteresado',
         'IdIntTipSeguimiento',
         'IdIntEstSeguimiento',
         'ObsIntSeguimiento',
@@ -19,7 +19,7 @@ class Seguimiento extends Model
 
     public function interesado()
     {
-        return $this->belongsTo(Interesado::class, 'Id_Interesado');
+        return $this->belongsTo(Interesado::class, 'IdInteresado');
     }
 
     public function tipoSeguimiento()

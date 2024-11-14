@@ -23,7 +23,7 @@ class DepartamentoResource extends Resource
 
     protected static ?string $navigationGroup = 'País/Departamento/Municipio';
 
-    protected static ?int $navigationSort = 24;
+    protected static ?int $navigationSort = 25;
 
     protected static ?string $navigationIcon = 'heroicon-o-building-office';
 
@@ -34,14 +34,15 @@ class DepartamentoResource extends Resource
                 Forms\Components\TextInput::make('CodDepartamento')
                     ->label('Código del Departamento')
                     ->required()
-                    ->unique()
+                    ->unique(ignorable: fn ($record) => $record)
                     ->maxLength(5),
                 Forms\Components\TextInput::make('DesDepartamento')
                     ->label('Nombre del Departamento')
                     ->required()
                     ->maxLength(45),
                 Forms\Components\Select::make('IdTipPais')
-                    ->relationship('pais', 'DesPais')
+                    ->label('País')
+                    ->relationship('pais', 'DesPais', fn ($query) => $query->where('IdTipPais', 1))
                     ->required(),
             ]);
     }

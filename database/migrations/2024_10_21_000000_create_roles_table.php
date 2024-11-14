@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('inter_tipseguimiento', function (Blueprint $table) {
-            $table->id('IdIntTipSeguimiento');
-            $table->string('DesTipSeguimiento');
-            $table->unsignedInteger('ActivaMatricula')->default(0);
-            $table->string('InstTipSeguimiento', 4000);
+        Schema::create('roles', function (Blueprint $table) {
+            $table->id();
+            $table->string('rol');
+            $table->string('descripcion');
             $table->timestamps();
         });
     }
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('inter_tipseguimiento');
+        Schema::dropIfExists('roles');
     }
 };

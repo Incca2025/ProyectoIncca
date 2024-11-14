@@ -28,7 +28,7 @@ class PersonaResource extends Resource
 
     protected static ?string $navigationGroup = 'Personas';
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 4;
 
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
@@ -43,7 +43,7 @@ class PersonaResource extends Resource
                 Forms\Components\TextInput::make('NumDocIdentidad')
                     ->required()
                     ->label('Documento de Identidad')
-                    ->unique()
+                    ->unique(ignorable: fn ($record) => $record)
                     ->maxLength(45),
                 Forms\Components\TextInput::make('PriApellido')
                     ->required()
@@ -93,6 +93,13 @@ class PersonaResource extends Resource
                         $set('IdTipDeptoNacimiento', null); 
                         $set('IdTipMunNacimiento', null);
                     })
+                    ->afterStateHydrated(function (Set $set, $state) {
+                        $set('IdPaisNacimiento', null);
+                        $set('IdTipDeptoNacimiento', null);
+                        $set('IdTipMunNacimiento', null);
+                        $set('OtroDeptoNacimiento', null);
+                        $set('OtroMunNacimiento', null);
+                    })
                     ->required(),
                 Forms\Components\Select::make('IdTipDeptoNacimiento')
                     ->label('Departamento de Nacimiento')
@@ -103,7 +110,8 @@ class PersonaResource extends Resource
                     ->preload()
                     ->live()
                     ->disabled(fn (Get $get) => $get('IdPaisNacimiento') !== '1')
-                    ->required(),
+                    ->nullable()
+                    ->required(fn (Get $get) => $get('IdPaisNacimiento') === '1'),
                 Forms\Components\Select::make('IdTipMunNacimiento')
                     ->label('Municipio de Nacimiento')
                     ->options(fn (Get $get): Collection => Municipio::query()
@@ -113,7 +121,8 @@ class PersonaResource extends Resource
                     ->preload()
                     ->live()
                     ->disabled(fn (Get $get) => $get('IdPaisNacimiento') !== '1')
-                    ->required(),
+                    ->nullable()
+                    ->required(fn (Get $get) => $get('IdPaisNacimiento') === '1'),
                 Forms\Components\TextInput::make('OtroDeptoNacimiento')
                     ->label('Otro Departamento de Nacimiento')
                     ->maxLength(45)
@@ -128,9 +137,16 @@ class PersonaResource extends Resource
                     ->searchable()
                     ->preload()
                     ->live()
-                    ->afterStateUpdated(function (Set $set) {
+                    ->afterStateUpdated(function (Set $set, $state) {
                         $set('IdTipDeptoResidencia', null);
                         $set('IdTipMunResidencia', null);
+                    })
+                    ->afterStateHydrated(function (Set $set, $state) {
+                        $set('IdPaisResidencia', null);
+                        $set('IdTipDeptoResidencia', null);
+                        $set('IdTipMunResidencia', null);
+                        $set('OtroDeptoResidencia', null);
+                        $set('OtroMunResidencia', null);
                     })
                     ->required(),   
                 Forms\Components\Select::make('IdTipDeptoResidencia')
@@ -142,7 +158,8 @@ class PersonaResource extends Resource
                     ->preload()
                     ->live()
                     ->disabled(fn (Get $get) => $get('IdPaisResidencia') !== '1')
-                    ->required(),
+                    ->nullable()
+                    ->required(fn (Get $get) => $get('IdPaisResidencia') === '1'),
                 Forms\Components\Select::make('IdTipMunResidencia')
                     ->label('Municipio de Residencia')
                     ->options(fn (Get $get): Collection => Municipio::query()
@@ -152,7 +169,8 @@ class PersonaResource extends Resource
                     ->preload()
                     ->live()
                     ->disabled(fn (Get $get) => $get('IdPaisResidencia') !== '1')
-                    ->required(),
+                    ->nullable()
+                    ->required(fn (Get $get) => $get('IdPaisResidencia') === '1'),
                 Forms\Components\TextInput::make('OtroDeptoResidencia')
                     ->label('Otro Departamento de Residencia')
                     ->disabled(fn (Get $get) => !$get('IdPaisResidencia') || $get('IdPaisResidencia') === '1')
@@ -258,12 +276,12 @@ class PersonaResource extends Resource
                 Tables\Columns\TextColumn::make('departamentoNacimiento.DesDepartamento')
                     ->label('Departamento de Nacimiento')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('OtroDeptoNacimiento')
-                    ->label('Otro Departamento de Nacimiento')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('municipioNacimiento.DesMunicipio')
                     ->label('Municipio de Nacimiento')
                     ->sortable(),
+                Tables\Columns\TextColumn::make('OtroDeptoNacimiento')
+                    ->label('Otro Departamento de Nacimiento')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('OtroMunNacimiento')
                     ->label('Otro Municipio de Nacimiento')
                     ->searchable(),
@@ -273,12 +291,12 @@ class PersonaResource extends Resource
                 Tables\Columns\TextColumn::make('departamentoResidencia.DesDepartamento')
                     ->label('Departamento de Residencia')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('OtroDeptoResidencia')
-                    ->label('Otro Departamento de Residencia')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('municipioResidencia.DesMunicipio')
                     ->label('Municipio de Residencia')
                     ->sortable(),
+                Tables\Columns\TextColumn::make('OtroDeptoResidencia')
+                    ->label('Otro Departamento de Residencia')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('OtroMunResidencia')
                     ->label('Otro Municipio de Residencia')
                     ->searchable(),

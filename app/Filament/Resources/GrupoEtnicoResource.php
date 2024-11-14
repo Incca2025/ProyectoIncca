@@ -23,7 +23,7 @@ class GrupoEtnicoResource extends Resource
 
     protected static ?string $navigationGroup = 'Datos';
 
-    protected static ?int $navigationSort = 18;
+    protected static ?int $navigationSort = 19;
 
     protected static ?string $navigationIcon = 'heroicon-o-globe-americas';
 
@@ -34,7 +34,7 @@ class GrupoEtnicoResource extends Resource
                 Forms\Components\TextInput::make('CodMenGEtnico')
                     ->label('Código')
                     ->required()
-                    ->unique()
+                    ->unique(ignorable: fn ($record) => $record)
                     ->maxLength(5),
                 Forms\Components\TextInput::make('DesGrupEtnico')
                     ->label('Grupo Étnico')

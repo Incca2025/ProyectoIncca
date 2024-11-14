@@ -23,7 +23,7 @@ class SeguimientoResource extends Resource
 
     protected static ?string $navigationGroup = 'Seguimientos';
 
-    protected static ?int $navigationSort = 8;
+    protected static ?int $navigationSort = 9;
 
     protected static ?string $navigationIcon = 'heroicon-o-envelope';
 
@@ -31,20 +31,17 @@ class SeguimientoResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('Id_Interesado')
-                    ->relationship('interesado', 'Nombres_Int')
-                    ->label('Interesado')
-                    ->required(),
                 Forms\Components\Select::make('IdIntTipSeguimiento')
                     ->relationship('tipoSeguimiento', 'DesTipSeguimiento')    
-                    ->label('Tipo de Seguimiento')
+                    ->label('Tipo de Contacto')
                     ->required(),
                 Forms\Components\Select::make('IdIntEstSeguimiento')
                     ->relationship('estadoSeguimiento', 'DesIntEstSeguimiento')
-                    ->label('Estado del Seguimiento')
+                    ->label('Estado Proceso')
                     ->required(),
-                Forms\Components\TextInput::make('ObsIntSeguimiento')
+                Forms\Components\TextArea::make('ObsIntSeguimiento')
                     ->label('Observación')
+                    ->columnSpanFull()
                     ->required()
                     ->maxLength(1000),
             ]);
@@ -56,12 +53,13 @@ class SeguimientoResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('interesado.Nombres_Int')
                     ->label('Interesado')
-                    ->sortable(),
+                    ->sortable()
+                    ->formatStateUsing(fn ($record) => $record->interesado->Nombres_Int . ' ' . $record->interesado->Apellidos_Int),
                 Tables\Columns\TextColumn::make('tipoSeguimiento.DesTipSeguimiento')
-                    ->label('Tipo de Seguimiento')
+                    ->label('Tipo de Contacto')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('estadoSeguimiento.DesIntEstSeguimiento')
-                    ->label('Estado del Seguimiento')
+                    ->label('Estado Proceso')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('ObsIntSeguimiento')
                     ->label('Observación')
@@ -71,7 +69,7 @@ class SeguimientoResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
+                // Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([

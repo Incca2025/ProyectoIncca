@@ -23,7 +23,7 @@ class MunicipioResource extends Resource
 
     protected static ?string $navigationGroup = 'País/Departamento/Municipio';
 
-    protected static ?int $navigationSort = 25;
+    protected static ?int $navigationSort = 26;
 
     protected static ?string $navigationIcon = 'heroicon-o-building-office-2';
 
@@ -34,7 +34,7 @@ class MunicipioResource extends Resource
                 Forms\Components\TextInput::make('CodMunicipio')
                     ->label('Código del Municipio')
                     ->required()
-                    ->unique()
+                    ->unique(ignorable: fn ($record) => $record)
                     ->maxLength(5),
                 Forms\Components\TextInput::make('DesMunicipio')
                     ->label('Nombre del Municipio')
@@ -42,7 +42,7 @@ class MunicipioResource extends Resource
                     ->maxLength(45),
                 Forms\Components\Select::make('IdTipPais')
                     ->label('País')
-                    ->relationship('pais', 'DesPais')
+                    ->relationship('pais', 'DesPais', fn ($query) => $query->where('IdTipPais', 1))
                     ->required(),
                 Forms\Components\Select::make('IdTipDepartamento')
                     ->label('Departamento')

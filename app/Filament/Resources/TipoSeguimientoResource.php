@@ -23,7 +23,7 @@ class TipoSeguimientoResource extends Resource
 
     protected static ?string $navigationGroup = 'Seguimientos';
 
-    protected static ?int $navigationSort = 9;
+    protected static ?int $navigationSort = 10;
 
     protected static ?string $navigationIcon = 'heroicon-o-folder-open';
 
@@ -35,10 +35,13 @@ class TipoSeguimientoResource extends Resource
                     ->label('Descripción del Tipo de Seguimiento')
                     ->required()
                     ->maxLength(45),
-                Forms\Components\TextInput::make('ActivaMatricula')
-                    ->label('Matrícula')
+                Forms\Components\TextInput::make('InstTipSeguimiento')
+                    ->label('Instructivo')
                     ->required()
-                    ->numeric(),
+                    ->maxLength(4000),
+                Forms\Components\Checkbox::make('ActivaMatricula')
+                    ->label('Matrícula')
+                    ->inline(false),
             ]);
     }
 
@@ -52,6 +55,9 @@ class TipoSeguimientoResource extends Resource
                 Tables\Columns\TextColumn::make('ActivaMatricula')
                     ->label('Matrícula')
                     ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('InstTipSeguimiento')
+                    ->label('Instructivo')
                     ->sortable(),
             ])
             ->filters([
