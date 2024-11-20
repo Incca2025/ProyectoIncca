@@ -43,10 +43,6 @@ class SeguimientosRelationManager extends RelationManager
                                 $set('InstTipSeguimiento', $instructivos[$state] ?? null); 
                             })
                             ->required(),
-                        Forms\Components\Select::make('IdIntEstSeguimiento')
-                            ->relationship('estadoSeguimiento', 'DesIntEstSeguimiento')
-                            ->label('Estado Proceso')
-                            ->required(),
                         Forms\Components\TextArea::make('ObsIntSeguimiento')
                             ->label('Observación')
                             ->required()

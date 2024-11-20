@@ -56,9 +56,10 @@ class InteresadoResource extends Resource
                     ->label('Número de Celular')
                     ->required()
                     ->maxLength(15),
-                Forms\Components\TextInput::make('Estado')
+                Forms\Components\Select::make('IdIntEstSeguimiento')
+                    ->label('Estado de Seguimiento')
+                    ->relationship('estados', 'DesIntEstSeguimiento')
                     ->required()
-                    ->numeric()
                     ->default(1),
             ]);
     }
@@ -82,7 +83,8 @@ class InteresadoResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('Celular_Int')
                     ->label('Número de Celular'),
-                Tables\Columns\TextColumn::make('Estado')
+                Tables\Columns\TextColumn::make('estados.DesIntEstSeguimiento')
+                    ->label('Estado de Seguimiento')
                     ->numeric()
                     ->searchable()
                     ->sortable(),

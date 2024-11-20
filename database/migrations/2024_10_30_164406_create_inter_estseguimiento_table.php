@@ -12,8 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('inter_estseguimiento', function (Blueprint $table) {
-            $table->id('IdIntEstSeguimiento');
+            $table->unsignedBigInteger('IdIntEstSeguimiento')->primary();
             $table->string('DesIntEstSeguimiento', 45);
+            $table->unsignedInteger('ActivaMatricula')->default(0);
             $table->timestamps();
         });
     }

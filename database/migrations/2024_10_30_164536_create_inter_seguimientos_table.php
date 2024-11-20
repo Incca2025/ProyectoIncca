@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('inter_seguimientos', function (Blueprint $table) {
-            $table->id('IdIntSegumiento');
+            $table->id('IdIntSeguimiento');
             $table->foreignId('IdInteresado')->constrained('interesado', 'IdInteresado');
             $table->foreignId('IdIntTipSeguimiento')->constrained('inter_tipseguimiento', 'IdIntTipSeguimiento');
-            $table->foreignId('IdIntEstSeguimiento')->constrained('inter_estseguimiento', 'IdIntEstSeguimiento');
+            // $table->foreignId('IdIntEstSeguimiento')->constrained('inter_estseguimiento', 'IdIntEstSeguimiento');
             $table->string('ObsIntSeguimiento', 1000);
             $table->timestamps();
         });

@@ -8,12 +8,11 @@ class Seguimiento extends Model
 {
     protected $table = 'inter_seguimientos';
 
-    protected $primaryKey = 'IdIntSegumiento';
+    protected $primaryKey = 'IdIntSeguimiento';
 
     protected $fillable = [
         'IdInteresado',
         'IdIntTipSeguimiento',
-        'IdIntEstSeguimiento',
         'ObsIntSeguimiento',
     ];
 

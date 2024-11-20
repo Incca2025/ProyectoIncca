@@ -16,7 +16,7 @@ class Interesado extends Model
         'Email_Int',
         'IdProgAcademico',
         'Celular_Int',
-        'Estado',
+        'IdIntEstSeguimiento',
     ];
 
     public function programa()
@@ -27,6 +27,10 @@ class Interesado extends Model
     public function seguimientos()
     {
         return $this->hasMany(Seguimiento::class, 'IdInteresado');
+    }
+
+    public function estados() {
+        return $this->belongsTo(EstadoSeguimiento::class, 'IdIntEstSeguimiento');
     }
     
 }

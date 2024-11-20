@@ -38,10 +38,7 @@ class TipoSeguimientoResource extends Resource
                 Forms\Components\TextInput::make('InstTipSeguimiento')
                     ->label('Instructivo')
                     ->required()
-                    ->maxLength(4000),
-                Forms\Components\Checkbox::make('ActivaMatricula')
-                    ->label('Matrícula')
-                    ->inline(false),
+                    ->maxLength(4000)
             ]);
     }
 
@@ -52,10 +49,6 @@ class TipoSeguimientoResource extends Resource
                 Tables\Columns\TextColumn::make('DesTipSeguimiento')
                     ->label('Descripción del Tipo de Seguimiento')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('ActivaMatricula')
-                    ->label('Matrícula')
-                    ->numeric()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('InstTipSeguimiento')
                     ->label('Instructivo')
                     ->sortable(),

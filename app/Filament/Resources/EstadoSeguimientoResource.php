@@ -31,10 +31,18 @@ class EstadoSeguimientoResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\TextInput::make('IdIntEstSeguimiento')
+                    ->label('Id del Estado de Seguimiento')
+                    ->numeric()
+                    ->required(),
                 Forms\Components\TextInput::make('DesIntEstSeguimiento')
                     ->label('Descripción del Estado de Seguimiento')
                     ->required()
                     ->maxLength(45),
+                Forms\Components\TextInput::make('ActivaMatricula')
+                    ->label('Matrícula Activa')
+                    ->numeric()
+                    ->required()
             ]);
     }
 
@@ -44,6 +52,9 @@ class EstadoSeguimientoResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('DesIntEstSeguimiento')
                     ->label('Descripción del Estado de Seguimiento')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('ActivaMatricula')
+                    ->label('Matrícula Activa')
                     ->searchable(),
             ])
             ->filters([

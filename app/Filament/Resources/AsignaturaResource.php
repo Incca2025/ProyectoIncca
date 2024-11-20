@@ -1,0 +1,86 @@
+<?php
+
+namespace App\Filament\Resources;
+
+use App\Filament\Resources\AsignaturaResource\Pages;
+use App\Filament\Resources\AsignaturaResource\RelationManagers;
+use App\Models\Asignatura;
+use Filament\Forms;
+use Filament\Forms\Form;
+use Filament\Resources\Resource;
+use Filament\Tables;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+
+class AsignaturaResource extends Resource
+{
+    protected static ?string $model = Asignatura::class;
+
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    public static function form(Form $form): Form
+    {
+        return $form
+            ->schema([
+                Forms\Components\TextInput::make('CodAsignatura')
+                    ->required()
+                    ->maxLength(20),
+                Forms\Components\TextInput::make('DesAsignatura')
+                    ->required()
+                    ->maxLength(200),
+                Forms\Components\TextInput::make('IdDepartamento')
+                    ->required()
+                    ->numeric(),
+            ]);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return $table
+            ->columns([
+                Tables\Columns\TextColumn::make('CodAsignatura')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('DesAsignatura')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('IdDepartamento')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+            ])
+            ->filters([
+                //
+            ])
+            ->actions([
+                Tables\Actions\EditAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
+            ]);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => Pages\ListAsignaturas::route('/'),
+            'create' => Pages\CreateAsignatura::route('/create'),
+            'edit' => Pages\EditAsignatura::route('/{record}/edit'),
+        ];
+    }
+}

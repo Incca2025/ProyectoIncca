@@ -12,5 +12,6 @@ class EstadoSeguimiento extends Model
 
     protected $fillable = [
         'DesIntEstSeguimiento',
+        'ActivaMatricula'
     ];
 }

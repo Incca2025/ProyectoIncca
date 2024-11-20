@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('inter_tipseguimiento', function (Blueprint $table) {
             $table->id('IdIntTipSeguimiento');
             $table->string('DesTipSeguimiento');
-            $table->unsignedInteger('ActivaMatricula')->default(0);
             $table->string('InstTipSeguimiento', 4000);
             $table->timestamps();
         });

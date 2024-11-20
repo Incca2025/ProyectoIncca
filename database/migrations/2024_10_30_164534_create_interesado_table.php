@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('Email_Int', 100);
             $table->foreignId('IdProgAcademico')->constrained('progacademico', 'IdProgAcademico');
             $table->string('Celular_Int', 15);
-            $table->integer('Estado')->default(1);
+            $table->foreignId('IdIntEstSeguimiento')->constrained('inter_estseguimiento', 'IdIntEstSeguimiento')->default(1);
             $table->timestamps();
 
         });

@@ -37,7 +37,7 @@ class EstratoResource extends Resource
                     ->unique(ignorable: fn ($record) => $record)
                     ->maxLength(5),
                 Forms\Components\TextInput::make('DesEstrato')
-                    ->label('Estrado')
+                    ->label('Estrato')
                     ->required()
                     ->maxLength(45),
             ]);
@@ -51,7 +51,7 @@ class EstratoResource extends Resource
                     ->label('Código')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('DesEstrato')
-                    ->label('Estrado')
+                    ->label('Estrato')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Creado el')

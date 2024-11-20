@@ -35,10 +35,6 @@ class SeguimientoResource extends Resource
                     ->relationship('tipoSeguimiento', 'DesTipSeguimiento')    
                     ->label('Tipo de Contacto')
                     ->required(),
-                Forms\Components\Select::make('IdIntEstSeguimiento')
-                    ->relationship('estadoSeguimiento', 'DesIntEstSeguimiento')
-                    ->label('Estado Proceso')
-                    ->required(),
                 Forms\Components\TextArea::make('ObsIntSeguimiento')
                     ->label('Observación')
                     ->columnSpanFull()
@@ -57,9 +53,6 @@ class SeguimientoResource extends Resource
                     ->formatStateUsing(fn ($record) => $record->interesado->Nombres_Int . ' ' . $record->interesado->Apellidos_Int),
                 Tables\Columns\TextColumn::make('tipoSeguimiento.DesTipSeguimiento')
                     ->label('Tipo de Contacto')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('estadoSeguimiento.DesIntEstSeguimiento')
-                    ->label('Estado Proceso')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('ObsIntSeguimiento')
                     ->label('Observación')
