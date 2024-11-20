@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pen__asignatura');
+        Schema::dropIfExists('pen_asignatura');
     }
 };
