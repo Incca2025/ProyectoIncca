@@ -19,9 +19,11 @@ class PuebloIndigenaResource extends Resource
 
     protected static ?string $navigationLabel = 'Pueblos Indígenas';
 
+    protected static ?string $modelLabel = 'Pueblos Indígenas';
+
     protected static ?string $navigationGroup = 'Datos';
 
-    protected static ?int $navigationSort = 17;
+    protected static ?int $navigationSort = 21;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -32,7 +34,7 @@ class PuebloIndigenaResource extends Resource
                 Forms\Components\TextInput::make('CodMenPIndigena')
                     ->label('Código')
                     ->required()
-                    ->unique()
+                    ->unique(ignorable: fn ($record) => $record)
                     ->maxLength(5),
                 Forms\Components\TextInput::make('DesPueIndigena')
                     ->label('Pueblos Indígenas')

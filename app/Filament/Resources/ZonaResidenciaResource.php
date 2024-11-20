@@ -19,9 +19,11 @@ class ZonaResidenciaResource extends Resource
 
     protected static ?string $navigationLabel = 'Zona Residencias';
 
+    protected static ?string $modelLabel = 'Zona Residencias';
+
     protected static ?string $navigationGroup = 'Datos';
 
-    protected static ?int $navigationSort = 19;
+    protected static ?int $navigationSort = 23;
 
     protected static ?string $navigationIcon = 'heroicon-o-home-modern';
 
@@ -32,7 +34,7 @@ class ZonaResidenciaResource extends Resource
                 Forms\Components\TextInput::make('CodMenZResidencial')
                     ->label('Código')
                     ->required()
-                    ->unique()
+                    ->unique(ignorable: fn ($record) => $record)
                     ->maxLength(5),
                 Forms\Components\TextInput::make('DesZonaResidencial')
                     ->label('Zona Residencial')

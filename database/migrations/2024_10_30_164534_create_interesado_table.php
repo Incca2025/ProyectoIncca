@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('interesado', function (Blueprint $table) {
-            $table->id('Id_Interesado');
+            $table->id('IdInteresado');
             $table->string('Nombres_Int', 60);
             $table->string('Apellidos_Int', 60);
             $table->string('Email_Int', 100);
             $table->foreignId('IdProgAcademico')->constrained('progacademico', 'IdProgAcademico');
             $table->string('Celular_Int', 15);
-            $table->integer('Estado')->default(1);
+            $table->foreignId('IdIntEstSeguimiento')->constrained('inter_estseguimiento', 'IdIntEstSeguimiento')->default(1);
             $table->timestamps();
 
         });

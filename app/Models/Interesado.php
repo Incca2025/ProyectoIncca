@@ -8,7 +8,7 @@ class Interesado extends Model
 {
     protected $table = 'interesado';
 
-    protected $primaryKey = 'Id_Interesado';
+    protected $primaryKey = 'IdInteresado';
 
     protected $fillable = [
         'Nombres_Int',
@@ -16,12 +16,21 @@ class Interesado extends Model
         'Email_Int',
         'IdProgAcademico',
         'Celular_Int',
-        'Estado',
+        'IdIntEstSeguimiento',
     ];
 
     public function programa()
     {
         return $this->belongsTo(ProgramaAcademico::class, 'IdProgAcademico');
+    }
+
+    public function seguimientos()
+    {
+        return $this->hasMany(Seguimiento::class, 'IdInteresado');
+    }
+
+    public function estados() {
+        return $this->belongsTo(EstadoSeguimiento::class, 'IdIntEstSeguimiento');
     }
     
 }

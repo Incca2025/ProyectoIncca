@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\ValidationException;
 
 class Persona extends Model
 {
@@ -139,12 +140,15 @@ class Persona extends Model
         return $this->belongsTo(ZonaResidencia::class, 'IdTipZonaResidencia');
     }
 
-    
-
     protected static function booted()
     {
         static::saving(function ($persona) {
             $persona->NumDocIdentidad_Num = preg_replace('/[^0-9]/', '', $persona->NumDocIdentidad);
+            // if (self::where('NumDocIdentidad_Num', $persona->NumDocIdentidad_Num)->exists()) {
+            //     throw ValidationException::withMessages([
+            //         'El número de documento de identidad ya existe.'
+            //     ]);
+            // }
         });
     }
 

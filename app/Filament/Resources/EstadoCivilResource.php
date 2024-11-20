@@ -19,9 +19,11 @@ class EstadoCivilResource extends Resource
 
     protected static ?string $navigationLabel = 'Estados Civiles';
 
+    protected static ?string $modelLabel = 'Estados Civiles';
+
     protected static ?string $navigationGroup = 'Datos';
 
-    protected static ?int $navigationSort = 12;
+    protected static ?int $navigationSort = 16;
 
     protected static ?string $navigationIcon = 'heroicon-o-heart';
 
@@ -32,7 +34,7 @@ class EstadoCivilResource extends Resource
                 Forms\Components\TextInput::make('CodMenEstCivil')
                     ->label('Código')
                     ->required()
-                    ->unique()
+                    ->unique(ignorable: fn ($record) => $record)
                     ->maxLength(5),
                 Forms\Components\TextInput::make('DesEstCivil')
                     ->label('Estado Civil')

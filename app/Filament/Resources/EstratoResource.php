@@ -19,9 +19,11 @@ class EstratoResource extends Resource
     
     protected static ?string $navigationLabel = 'Estratos';
 
+    protected static ?string $modelLabel = 'Estratos';
+    
     protected static ?string $navigationGroup = 'Datos';
 
-    protected static ?int $navigationSort = 13;
+    protected static ?int $navigationSort = 17;
 
     protected static ?string $navigationIcon = 'heroicon-o-currency-dollar';
 
@@ -32,10 +34,10 @@ class EstratoResource extends Resource
                 Forms\Components\TextInput::make('CodMenEstrato')
                     ->label('Código')
                     ->required()
-                    ->unique()
+                    ->unique(ignorable: fn ($record) => $record)
                     ->maxLength(5),
                 Forms\Components\TextInput::make('DesEstrato')
-                    ->label('Estrado')
+                    ->label('Estrato')
                     ->required()
                     ->maxLength(45),
             ]);
@@ -49,7 +51,7 @@ class EstratoResource extends Resource
                     ->label('Código')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('DesEstrato')
-                    ->label('Estrado')
+                    ->label('Estrato')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Creado el')

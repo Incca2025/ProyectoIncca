@@ -18,9 +18,11 @@ class CapacidadExcepcionalResource extends Resource
     protected static ?string $model = CapacidadExcepcional::class;
     protected static ?string $navigationLabel = 'Capacidades Excepcionales';
 
+    protected static ?string $modelLabel = 'Capacidades Excepcionales';
+
     protected static ?string $navigationGroup = 'Datos';
 
-    protected static ?int $navigationSort = 8;
+    protected static ?int $navigationSort = 12;
 
     protected static ?string $navigationIcon = 'heroicon-o-rocket-launch';
 
@@ -31,7 +33,7 @@ class CapacidadExcepcionalResource extends Resource
                 Forms\Components\TextInput::make('CodMenCExpc')
                     ->label('Código')
                     ->required()
-                    ->unique()
+                    ->unique(ignorable: fn ($record) => $record)
                     ->maxLength(5),
                 Forms\Components\TextInput::make('DesCapExcepcional')
                     ->label('Capacidad Excepcional')

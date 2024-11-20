@@ -19,9 +19,11 @@ class PaisResource extends Resource
 
     protected static ?string $navigationLabel = 'Países';
 
+    protected static ?string $modelLabel = 'Países';
+
     protected static ?string $navigationGroup = 'País/Departamento/Municipio';
 
-    protected static ?int $navigationSort = 20;
+    protected static ?int $navigationSort = 24;
 
     protected static ?string $navigationIcon = 'heroicon-o-flag';
 
@@ -30,12 +32,12 @@ class PaisResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('CodPais')
-                    ->label('Código')
+                    ->label('Código del País')
                     ->required()
-                    ->unique()
+                    ->unique(ignorable: fn ($record) => $record)
                     ->maxLength(5),
                 Forms\Components\TextInput::make('DesPais')
-                    ->label('País')
+                    ->label('Nombre del País')
                     ->required()
                     ->maxLength(45),
             ]);

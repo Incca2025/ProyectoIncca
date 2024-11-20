@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id('IdProgAcademico');
             $table->string('NomProgAcademico');
             $table->foreignId('IdNivPrograma')->constrained('nivprograma', 'IdNivPrograma');
-            $table->integer('ResMen');
+            $table->unsignedInteger('ResMen');
             $table->string('FecResMen', 45);
-            $table->integer('Snies');
+            $table->unsignedInteger('Snies');
             $table->foreignId('IdTipPeriodo')->constrained('tipperiodo', 'IdTipPeriodo');
-            $table->integer('NumPeriodos');
+            $table->unsignedInteger('NumPeriodos');
             $table->timestamps();
 
         });

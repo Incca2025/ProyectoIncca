@@ -10,7 +10,7 @@ class PeriodoAcademico extends Model
     protected $primaryKey = 'IdTipPeriodo';
     
     protected $fillable = [
-        'DesTipPeriod'
+        'DesTipPeriodo'
     ];
 
     public function programas()

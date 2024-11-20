@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('personas', function (Blueprint $table) {
             $table->id('IdPersona');
             $table->string('NumDocIdentidad', 45)->unique();
-            $table->integer('NumDocIdentidad_Num')->nullable();
+            $table->unsignedInteger('NumDocIdentidad_Num')->nullable();
             $table->foreignId('IdTipDocIdentidad')->constrained('tipdocidentidad', 'IdTipDocIdentidad');
             $table->string('PriApellido', 45);
             $table->string('SegApellido', 45)->nullable();
@@ -27,14 +27,14 @@ return new class extends Migration
             $table->date('FecNacimiento');
             $table->string('TelCelular', 25);
             $table->foreignId('IdPaisNacimiento')->constrained('tippaises', 'IdTipPais');
-            $table->foreignId('IdTipMunNacimiento')->constrained('tipmunicipios', 'IdTipMunicipio');
+            $table->foreignId('IdTipMunNacimiento')->nullable()->constrained('tipmunicipios', 'IdTipMunicipio');
             $table->string('OtroMunNacimiento', 45)->nullable();
-            $table->foreignId('IdTipDeptoNacimiento')->constrained('tipdepartamentos', 'IdTipDepartamento');
+            $table->foreignId('IdTipDeptoNacimiento')->nullable()->constrained('tipdepartamentos', 'IdTipDepartamento');
             $table->string('OtroDeptoNacimiento', 45)->nullable();
             $table->foreignId('IdPaisResidencia')->constrained('tippaises', 'IdTipPais');
-            $table->foreignId('IdTipMunResidencia')->constrained('tipmunicipios', 'IdTipMunicipio');
+            $table->foreignId('IdTipMunResidencia')->nullable()->constrained('tipmunicipios', 'IdTipMunicipio');
             $table->string('OtroMunResidencia', 45)->nullable();
-            $table->foreignId('IdTipDeptoResidencia')->constrained('tipdepartamentos', 'IdTipDepartamento');
+            $table->foreignId('IdTipDeptoResidencia')->nullable()->constrained('tipdepartamentos', 'IdTipDepartamento');
             $table->string('OtroDeptoResidencia', 45)->nullable();
             $table->string('DocExpedidoEn', 45);
             $table->string('Nacionalidad', 45)->nullable();

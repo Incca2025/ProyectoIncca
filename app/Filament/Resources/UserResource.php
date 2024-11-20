@@ -19,13 +19,11 @@ class UserResource extends Resource
 
     protected static ?string $navigationLabel = 'Usuarios';
 
-    protected static ?string $modelLabel = 'Usuario';
-
-    // protected static ?string $pluralModelLabel = 'Usuarios';
+    protected static ?string $modelLabel = 'Usuarios';
 
     protected static ?string $navigationGroup = 'Personas';
 
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 3;
 
     protected static ?string $navigationIcon = 'heroicon-o-user-circle';
 
@@ -38,16 +36,19 @@ class UserResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('email')
-                    ->label('Correo Electrónico')
+                    ->label('Usuario o Correo Electrónico')
                     ->email()
                     ->required()
                     ->maxLength(255),
-                // Forms\Components\DateTimePicker::make('email_verified_at'),
                 Forms\Components\TextInput::make('password')
                     ->label('Contraseña')
                     ->password()
                     ->required()
                     ->maxLength(255),
+                Forms\Components\Select::make('IdRol')
+                    ->relationship('rol', 'rol')
+                    ->searchable()
+                    ->required()
             ]);
     }
 
@@ -61,10 +62,7 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('email')
                     ->label('Correo Electrónico')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('email_verified_at')
-                    ->label('Correo Electrónico Verificado el')
-                    ->dateTime()
-                    ->toggleable(isToggledHiddenByDefault: true)
+                Tables\Columns\TextColumn::make('rol.rol')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Creado el')
@@ -89,6 +87,7 @@ class UserResource extends Resource
                 ]),
             ]);
     }
+
 
     public static function getRelations(): array
     {

@@ -19,9 +19,11 @@ class ComunidadNegraResource extends Resource
     
     protected static ?string $navigationLabel = 'Comunidades Negras';
 
+    protected static ?string $modelLabel = 'Comunidades Negras';
+
     protected static ?string $navigationGroup = 'Datos';
 
-    protected static ?int $navigationSort = 9;
+    protected static ?int $navigationSort = 13;
 
     protected static ?string $navigationIcon = 'heroicon-o-face-smile';
 
@@ -32,7 +34,7 @@ class ComunidadNegraResource extends Resource
                 Forms\Components\TextInput::make('CodMenCN')
                     ->label('Código')
                     ->required()
-                    ->unique()
+                    ->unique(ignorable: fn ($record) => $record)
                     ->maxLength(5),
                 Forms\Components\TextInput::make('DesComNegra')
                     ->label('Comunidad Negra')

@@ -19,9 +19,11 @@ class LeyVeteranosResource extends Resource
 
     protected static ?string $navigationLabel = 'Ley Veteranos';
 
+    protected static ?string $modelLabel = 'Ley Veteranos';
+
     protected static ?string $navigationGroup = 'Datos';
 
-    protected static ?int $navigationSort = 16;
+    protected static ?int $navigationSort = 20;
 
     protected static ?string $navigationIcon = 'heroicon-o-scale';
 
@@ -32,7 +34,7 @@ class LeyVeteranosResource extends Resource
                 Forms\Components\TextInput::make('CodMenVetarno')
                     ->label('Código')
                     ->required()
-                    ->unique()
+                    ->unique(ignorable: fn ($record) => $record)
                     ->maxLength(5),
                 Forms\Components\TextInput::make('DesVeterano')
                     ->label('Ley Veteranos')
