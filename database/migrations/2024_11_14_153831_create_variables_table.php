@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('variables', function (Blueprint $table) {
             $table->id(column: 'IdVariable');
-            $table->string('Variable', 50);
+            $table->string('Variable', 50)->unique();
             $table->string('DesVariable', 200);
             $table->decimal('NumVariable', 10, 2)->nullable();
             $table->string('TxtVariable', 1000);

@@ -17,4 +17,14 @@ class PensumAsignatura extends Model
         'IdAsignatura',
     ];
 
+    public function pensum()
+    {
+        return $this->belongsTo(Pensum::class, 'IdPensum');
+    }
+
+    public function asignaturas()
+    {
+        return $this->belongsTo(Asignatura::class, 'IdAsignatura');
+    }
+
 }

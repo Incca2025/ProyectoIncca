@@ -24,23 +24,31 @@ class PensumAsignaturaResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('numPeriodo')
+                    ->label('Número de periodo')
                     ->required()
                     ->numeric()
-                    ->default(1),
+                    ->default(1)
+                    ->minValue(1),
                 Forms\Components\TextInput::make('Electiva')
+                    ->label('Electiva')
                     ->required()
                     ->numeric()
-                    ->default(0),
+                    ->default(0)
+                    ->minValue(0),
                 Forms\Components\TextInput::make('numCreditos')
+                    ->label(label: 'Número de créditos')
                     ->required()
                     ->numeric()
-                    ->default(0),
-                Forms\Components\TextInput::make('IdPensum')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('IdAsignatura')
-                    ->required()
-                    ->numeric(),
+                    ->default(0)
+                    ->minValue(0),
+                Forms\Components\Select::make('IdPensum')
+                    ->relationship('pensum', 'desPensum')
+                    ->label(label: 'Pensum')
+                    ->required(),
+                Forms\Components\Select::make('IdAsignatura')
+                    ->relationship('asignaturas', 'DesAsignatura')
+                    ->label(label: 'Asignatura')
+                    ->required(),
             ]);
     }
 
@@ -49,25 +57,30 @@ class PensumAsignaturaResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('numPeriodo')
+                    ->label('Número de periodo')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('Electiva')
+                    ->label('Electiva')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('numCreditos')
+                    ->label(label: 'Número de créditos')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('IdPensum')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('pensum.desPensum')
+                    ->label(label: 'Pensum')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('IdAsignatura')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('asignaturas.DesAsignatura')
+                    ->label(label: 'Asignatura')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Creado el')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Actualizado el')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

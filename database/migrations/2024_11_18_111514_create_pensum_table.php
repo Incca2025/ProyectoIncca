@@ -15,12 +15,14 @@ return new class extends Migration
             $table->id('IdPensum');
             $table->foreignId('IdProgAcademico')->constrained('progacademico', 'IdProgAcademico');
             $table->string('perAcademico_Inicial', 45);
-            $table->string('perAcademico_Final', 45);
+            $table->string('perAcademico_Final', 45)->nullable();
             $table->string('desPensum', 40);
             $table->unsignedInteger('numCredAprob');
-            $table->decimal('promMínimo', 4, 2);
+            $table->decimal('promMinimo', 4, 2);
             $table->unsignedInteger('numPeriodos');
+            $table->string('CodPensum', 15);
             $table->foreignId('IdTipPeriodos')->constrained('tip_periodopensum', 'IdTipPeriodos');
+            $table->timestamps();
         });
     }
 

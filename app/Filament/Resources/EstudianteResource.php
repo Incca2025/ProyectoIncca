@@ -25,18 +25,21 @@ class EstudianteResource extends Resource
             ->schema([
                 Forms\Components\Select::make('IdPersona')
                     ->relationship('personas', 'NumDocIdentidad_Num')
+                    ->label('Id del Estudiante')
                     ->unique()
                     ->required(),
                 Forms\Components\TextInput::make('CodEstudiante')
+                    ->label('Código del Estudiante')
                     ->required()
                     ->maxLength(20),
                 Forms\Components\TextInput::make('EmailEstudiante')
+                    ->label('Correo electrónico del Estudiante')
                     ->required()
                     ->maxLength(80),
-                Forms\Components\TextInput::make('EstEstudiante')
-                    ->required()
-                    ->numeric()
-                    ->default(1),
+                Forms\Components\Select::make('IdEstEstudiante')
+                    ->relationship('estud_estados', 'DesEstEstudiante')
+                    ->label('Estado del Estudiante')
+                    ->required(),
             ]);
     }
 
@@ -45,20 +48,24 @@ class EstudianteResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('IdPersona')
-                    ->numeric()
+                    ->label('Id del Estudiante')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('CodEstudiante')
+                    ->label('Código del Estudiante')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('EmailEstudiante')
+                    ->label('Correo electrónico del Estudiante')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('EstEstudiante')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('estud_estados.DesEstEstudiante')
+                    ->label('Estado del Estudiante')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Creado el')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Actualizado el')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

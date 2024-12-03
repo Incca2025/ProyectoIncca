@@ -17,6 +17,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Collection;
+use Filament\Tables\Enums\ActionsPosition;
 
 class PersonaResource extends Resource
 {
@@ -70,11 +71,6 @@ class PersonaResource extends Resource
                     ->email()
                     ->required()
                     ->label('Correo Electrónico Personal')
-                    ->maxLength(45),
-                Forms\Components\TextInput::make('MailInstitucional')
-                    ->email()
-                    ->required()
-                    ->label('Correo Electrónico Institucional')
                     ->maxLength(45),
                 Forms\Components\DatePicker::make('FecNacimiento')
                     ->label('Fecha de Nacimiento')
@@ -260,9 +256,6 @@ class PersonaResource extends Resource
                 Tables\Columns\TextColumn::make('MailPersonal')
                     ->label('Correo Electrónico Personal')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('MailInstitucional')
-                    ->label('Correo Electrónico Institucional')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('FecNacimiento')
                     ->label('Fecha de Nacimiento')
                     ->date()
@@ -346,7 +339,7 @@ class PersonaResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-            ])
+            ], position: ActionsPosition::BeforeColumns)
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

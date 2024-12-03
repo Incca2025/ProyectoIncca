@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use Filament\Forms;
 use Filament\Tables;
+use Filament\Forms\Get;
 use Filament\Forms\Form;
 use App\Models\Interesado;
 use Filament\Tables\Table;
@@ -57,10 +58,15 @@ class InteresadoResource extends Resource
                     ->required()
                     ->maxLength(15),
                 Forms\Components\Select::make('IdIntEstSeguimiento')
-                    ->label('Estado de Seguimiento')
                     ->relationship('estados', 'DesIntEstSeguimiento')
-                    ->required()
-                    ->default(1),
+                    ->label('Estado de Seguimiento')
+                    ->live() 
+                    ->required(),
+                // Forms\Components\Actions::make([
+                //     Forms\Components\Actions\Action::make('crearPrematricula')
+                //         ->label('Crear Prematricula')
+                //         ->visible(fn (Get $get) => $get('IdIntEstSeguimiento') == 5)
+                //     ]),
             ]);
     }
 

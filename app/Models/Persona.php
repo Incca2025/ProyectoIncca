@@ -22,7 +22,6 @@ class Persona extends Model
         'DirResidencia',
         'TelResidencia',
         'MailPersonal',
-        'MailInstitucional',
         'FecNacimiento',
         'TelCelular',
         'IdPaisNacimiento',
@@ -144,12 +143,37 @@ class Persona extends Model
     {
         static::saving(function ($persona) {
             $persona->NumDocIdentidad_Num = preg_replace('/[^0-9]/', '', $persona->NumDocIdentidad);
+
+            if (strlen($persona->NumDocIdentidad_Num) > 15) {
+                throw ValidationException::withMessages([
+                    'NumDocIdentidad_Num' => 'El número de documento debe tener un máximo de 15 dígitos.',
+                ]);
+            }
             // if (self::where('NumDocIdentidad_Num', $persona->NumDocIdentidad_Num)->exists()) {
             //     throw ValidationException::withMessages([
             //         'El número de documento de identidad ya existe.'
             //     ]);
             // }
         });
+
+        // Evento al crear una nueva persona
+        static::created(function ($persona) {
+            $persona->crearEstudianteRelacionado();
+        });
+    }
+
+    public function crearEstudianteRelacionado()
+    {
+        // Crear el código de estudiante basado en el documento de identidad
+        $codigoEstudiante = $this->NumDocIdentidad_Num;
+
+        // Crear el estudiante relacionado
+        Estudiante::create([
+            'IdPersona' => $this->IdPersona, // Relación con persona
+            'CodEstudiante' => $codigoEstudiante,
+            'EmailEstudiante' => $this->MailPersonal, // Implementar la lógica para este método
+            'IdEstEstudiante' => 2, // Estado inicial del estudiante
+        ]);
     }
 
 }
