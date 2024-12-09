@@ -24,14 +24,13 @@ class PersonaEstudianteResource extends Resource
 
     protected static ?string $modelLabel = 'Persona y Estudiante desde Interesado';
 
-    protected static ?string $navigationGroup = 'Personas';
+    protected static ?string $navigationGroup = null;
+
+    protected static bool $shouldRegisterNavigation = false;
+
 
     public static function form(Form $form): Form
     {
-
-        // $interesadoId = request()->query('record');
-        // $interesado = Interesado::find($interesadoId);
-        // dd( $interesadoId);
 
         return $form
             ->schema([
@@ -45,31 +44,37 @@ class PersonaEstudianteResource extends Resource
                     ->unique(ignorable: fn ($record) => $record)
                     ->maxLength(45),
                     Forms\Components\TextInput::make('PriApellido')
-                    ->default(request()->get('primer_apellido'))
+                    // ->default(request()->get('primer_apellido'))
+                    ->default(session('primer_apellido'))
                     ->required()
                     ->label('Primer Apellido')
                     ->maxLength(45),
                 Forms\Components\TextInput::make('SegApellido')
-                    ->default(request()->get('segundo_apellido'))
+                    // ->default(request()->get('segundo_apellido'))
+                    ->default(session('segundo_apellido'))
                     ->label('Segundo Apellido')
                     ->maxLength(45),
                 Forms\Components\TextInput::make('PriNombre')
-                    ->default(request()->get('primer_nombre')) 
+                    // ->default(request()->get('primer_nombre')) 
+                    ->default(session('primer_nombre'))
                     ->required()
                     ->label('Primer Nombre')
                     ->maxLength(45),
                 Forms\Components\TextInput::make('SegNombre')
-                    ->default(request()->get('segundo_nombre')) 
+                    // ->default(request()->get('segundo_nombre')) 
+                    ->default(session('segundo_nombre'))
                     ->label('Segundo Nombre')
                     ->maxLength(45),
                 Forms\Components\TextInput::make('MailPersonal')
-                    ->default(request()->get('email'))
+                    // ->default(request()->get('email'))
+                    ->default(session('email'))
                     ->email()
                     ->required()
                     ->label('Correo Electrónico Personal')
                     ->maxLength(45),
                 Forms\Components\TextInput::make('TelCelular')
-                    ->default(request()->get('celular'))
+                    // ->default(request()->get('celular'))
+                    ->default(session('celular'))
                     ->label('Teléfono Celular')
                     ->required()
                     ->maxLength(25),
@@ -80,7 +85,30 @@ class PersonaEstudianteResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('tipoDocumento.DesDocidentidad')
+                    ->label('Tipo de Documento')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('NumDocIdentidad')
+                    ->label('Documento de Identidad')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('PriApellido')
+                    ->label('Primer Apellido')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('SegApellido')
+                    ->label('Segundo Apellido')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('PriNombre')
+                    ->label('Primer Nombre')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('SegNombre')
+                    ->label('Segundo Nombre')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('MailPersonal')
+                    ->label('Correo Electrónico Personal')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('TelCelular')
+                    ->label('Teléfono Celular')
+                    ->searchable(),
             ])
             ->filters([
                 //

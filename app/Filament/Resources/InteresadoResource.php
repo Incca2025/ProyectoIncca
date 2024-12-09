@@ -61,6 +61,7 @@ class InteresadoResource extends Resource
                     ->relationship('estados', 'DesIntEstSeguimiento')
                     ->label('Estado de Seguimiento')
                     ->live() 
+                    // ->disabled(fn (Get $get) => $get('IdIntEstSeguimiento') == 5)
                     ->required(),
                 // Forms\Components\Actions::make([
                 //     Forms\Components\Actions\Action::make('crearPrematricula')

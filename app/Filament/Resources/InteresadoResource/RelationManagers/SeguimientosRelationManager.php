@@ -115,7 +115,7 @@ class SeguimientosRelationManager extends RelationManager
             ->headerActions([
                 Tables\Actions\CreateAction::make()
                     ->createAnother(condition: false)
-                    ->modalSubmitActionLabel(label: 'Grabar')
+                    
                     // ->after(function (Seguimiento $record) {
                     //     $nuevoEstado = $data['DesIntEstSeguimiento'] ?? null; // Captura del formulario
                     //     // Lógica adicional después de crear el seguimiento

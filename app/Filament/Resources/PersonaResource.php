@@ -40,10 +40,12 @@ class PersonaResource extends Resource
                 Forms\Components\Select::make('IdTipDocIdentidad')
                     ->relationship('tipoDocumento', 'DesDocidentidad')
                     ->label('Tipo de Documento')
+                    ->visible(fn (string $operation) => $operation  === 'create')
                     ->required(),
                 Forms\Components\TextInput::make('NumDocIdentidad')
                     ->required()
                     ->label('Documento de Identidad')
+                    ->visible(fn (string $operation) => $operation  === 'create')
                     ->unique(ignorable: fn ($record) => $record)
                     ->maxLength(45),
                 Forms\Components\TextInput::make('PriApellido')
@@ -217,7 +219,6 @@ class PersonaResource extends Resource
                 Forms\Components\Select::make('IdTipZonaResidencia')
                     ->relationship('zonaResidencia', 'DesZonaResidencial')
                     ->required(),
-
             ]);
     }
 

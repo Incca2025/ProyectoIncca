@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\ValidationException;
 
 class ProgacaPeriodo extends Model
 {
@@ -29,6 +30,21 @@ class ProgacaPeriodo extends Model
     public function programaAcademico()
     {
         return $this->belongsTo(ProgramaAcademico::class, 'IdProgAcademico');
+    }
+
+    public static function booted()
+    {
+        static::saving(function ($model) {
+            $exists = static::where('IdProgAcademico', $model->IdProgAcademico)
+                ->where('Peracademico', $model->Peracademico)
+                ->exists();
+
+            if ($exists) {
+                throw ValidationException::withMessages([
+                    'Peracademico' => 'La combinación del programa y periodo académico ya existe.',
+                ]);
+            }
+        });
     }
 
 }

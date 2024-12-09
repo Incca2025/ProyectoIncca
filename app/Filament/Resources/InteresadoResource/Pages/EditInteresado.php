@@ -21,21 +21,17 @@ class EditInteresado extends EditRecord
             $nombres = explode(' ', $this->record->Nombres_Int, 2);
             $apellidos = explode(' ', $this->record->Apellidos_Int, 2);
 
-            // Asegurar que haya valores en cada parte
-            $primerNombre = $nombres[0] ?? '';
-            $segundoNombre = $nombres[1] ?? '';
-            $primerApellido = $apellidos[0] ?? '';
-            $segundoApellido = $apellidos[1] ?? '';
 
-            // Pasar los datos a la URL del resource PersonaEstudiante
-            $this->redirect(PersonaEstudianteResource::getUrl('create', [
-                'primer_nombre' => $primerNombre,
-                'segundo_nombre' => $segundoNombre,
-                'primer_apellido' => $primerApellido,
-                'segundo_apellido' => $segundoApellido,
+            session([
+                'primer_nombre' => $nombres[0] ?? '',
+                'segundo_nombre' => $nombres[1] ?? '',
+                'primer_apellido' => $apellidos[0] ?? '',
+                'segundo_apellido' => $apellidos[1] ?? '',
                 'email' => $this->record->Email_Int,
                 'celular' => $this->record->Celular_Int,
-            ]));
+            ]);
+    
+            $this->redirect(PersonaEstudianteResource::getUrl('create'));
         }
     }
 

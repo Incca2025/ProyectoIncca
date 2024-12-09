@@ -139,6 +139,11 @@ class Persona extends Model
         return $this->belongsTo(ZonaResidencia::class, 'IdTipZonaResidencia');
     }
 
+    public function estudiante()
+    {
+        return $this->hasOne(Estudiante::class, 'IdPersona');
+    }
+
     protected static function booted()
     {
         static::saving(function ($persona) {
