@@ -15,4 +15,9 @@ class Asignatura extends Model
         'IdDepartamento',
     ];
 
+    public function departamento()
+    {
+        return $this->belongsTo(DepartamentoAsignatura::class, 'IdDepartamento', 'IdDepartamento');
+    }
+
 }

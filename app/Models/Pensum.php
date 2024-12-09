@@ -15,9 +15,19 @@ class Pensum extends Model
         'perAcademico_Final',
         'desPensum',
         'numCredAprob',
-        'promMínimo',
+        'promMinimo',
         'numPeriodos',
         'IdTipPeriodos',
     ];
+
+    public function programas()
+    {
+        return $this->belongsTo(ProgramaAcademico::class, 'IdProgAcademico');
+    }
+
+    public function periodos()
+    {
+        return $this->belongsTo(PeriodoPensum::class, 'IdTipPeriodos');
+    }
 
 }

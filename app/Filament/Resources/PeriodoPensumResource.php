@@ -24,11 +24,14 @@ class PeriodoPensumResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('DesTipPeriodos')
+                    ->label('Descripción del Periodo Pensum')
                     ->required()
                     ->maxLength(45),
                 Forms\Components\TextInput::make('NumMes')
+                    ->label('Número de meses')
                     ->required()
                     ->numeric()
+                    ->minValue(0)
                     ->default(0),
             ]);
     }
@@ -38,16 +41,20 @@ class PeriodoPensumResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('DesTipPeriodos')
+                    ->label('Descripción del Periodo Pensum')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('NumMes')
+                    ->label('Número de meses')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Creado el')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->label('Actualizado el')
+		    ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])

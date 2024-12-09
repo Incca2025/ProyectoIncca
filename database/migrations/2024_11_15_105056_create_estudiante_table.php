@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('estudiante', function (Blueprint $table) {
-            $table->foreignId('IdPersona')->constrained('personas', 'IdPersona')->unique()->primary();
+            $table->foreignId('IdPersona')->primary()->constrained('personas', 'IdPersona');
             $table->string('CodEstudiante', 20);
             $table->string('EmailEstudiante', 80);
             $table->unsignedInteger('EstEstudiante')->default(1);

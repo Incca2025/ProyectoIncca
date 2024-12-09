@@ -24,14 +24,19 @@ class EstudEstadoResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('IdEstEstudiante')
+                    ->label('Id Estado Estudiante')
                     ->required()
-                    ->numeric(),
+                    ->numeric()
+                    ->minValue(1),
                 Forms\Components\TextInput::make('DesEstEstudiante')
+                    ->label('Descripción del Estudiante')
                     ->required()
                     ->maxLength(20),
                 Forms\Components\TextInput::make('ActEstEstudiante')
+                    ->label('Estudiante Activo')
                     ->required()
                     ->numeric()
+                    ->minValue(1)
                     ->default(1),
             ]);
     }
@@ -40,19 +45,24 @@ class EstudEstadoResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('IdEstEstudiante')
+               Tables\Columns\TextColumn::make('IdEstEstudiante')
+                    ->label('Id Estado Estudiante')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('DesEstEstudiante')
+                    ->label('Descripción del Estudiante')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('ActEstEstudiante')
+                    ->label('Estudiante Activo')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Creado el')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Actualizado el')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

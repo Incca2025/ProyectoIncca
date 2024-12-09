@@ -13,4 +13,9 @@ class DepartamentoAsignatura extends Model
         'DesDepartamento',
     ];
 
+    public function asignaturas()
+    {
+        return $this->hasMany(Asignatura::class, 'IdDepartamento', 'IdDepartamento');
+    }
+
 }

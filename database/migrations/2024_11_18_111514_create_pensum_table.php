@@ -18,9 +18,10 @@ return new class extends Migration
             $table->string('perAcademico_Final', 45);
             $table->string('desPensum', 40);
             $table->unsignedInteger('numCredAprob');
-            $table->decimal('promMínimo', 4, 2);
+            $table->decimal('promMinimo', 4, 2);
             $table->unsignedInteger('numPeriodos');
             $table->foreignId('IdTipPeriodos')->constrained('tip_periodopensum', 'IdTipPeriodos');
+	    $table->timestamps();
         });
     }
 

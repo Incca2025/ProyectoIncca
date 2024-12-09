@@ -14,6 +14,7 @@ use Filament\Tables\Actions\Action;
 use Filament\Forms\Components\Group;
 use Illuminate\Support\Facades\Cache;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Textarea;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Tables\Enums\ActionsPosition;
 use App\Filament\Resources\InteresadoResource;
@@ -41,13 +42,15 @@ class SeguimientosRelationManager extends RelationManager
                                     return TipoSeguimiento::pluck('InstTipSeguimiento', 'IdIntTipSeguimiento');
                                 });
                                 $set('InstTipSeguimiento', $instructivos[$state] ?? null); 
+				/* $instructivos = TipoSeguimiento::pluck('InstTipSeguimiento', 'IdIntTipSeguimiento');
+        			$set('InstTipSeguimiento', $instructivos[$state] ?? null); */ 
                             })
                             ->required(),
-                        Forms\Components\TextArea::make('ObsIntSeguimiento')
+                        Forms\Components\Textarea::make('ObsIntSeguimiento')
                             ->label('Observación')
                             ->required()
                             ->maxLength(1000),
-                        Forms\Components\TextArea::make('InstTipSeguimiento')
+                        Forms\Components\Textarea::make('InstTipSeguimiento')
                             ->label('Instructivo')
                             ->rows(4)
                             ->readOnly()
@@ -100,7 +103,7 @@ class SeguimientosRelationManager extends RelationManager
                 //     ->color('danger'),
                 // Tables\Actions\DeleteAction::make(),
                 Tables\Actions\EditAction::make(),
-            ])
+            ], position: ActionsPosition::BeforeColumns)
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

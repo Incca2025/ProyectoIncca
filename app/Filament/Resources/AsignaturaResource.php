@@ -24,14 +24,16 @@ class AsignaturaResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('CodAsignatura')
+                    ->label('Código de la Asignatura')
                     ->required()
                     ->maxLength(20),
                 Forms\Components\TextInput::make('DesAsignatura')
+                    ->label('Descripción de la Asignatura')
                     ->required()
                     ->maxLength(200),
-                Forms\Components\TextInput::make('IdDepartamento')
-                    ->required()
-                    ->numeric(),
+                Forms\Components\Select::make('IdDepartamento')
+	            ->relationship('departamento', 'DesDepartamento')
+                    ->required(),
             ]);
     }
 
@@ -40,18 +42,21 @@ class AsignaturaResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('CodAsignatura')
+                    ->label('Código de la Asignatura')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('DesAsignatura')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('IdDepartamento')
-                    ->numeric()
+                    ->label('Descripción de la Asignatura')
+		    ->searchable(),
+                Tables\Columns\TextColumn::make('departamento.DesDepartamento')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Creado el')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->label('Actualizado el')
+		    ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])

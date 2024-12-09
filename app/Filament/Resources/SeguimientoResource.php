@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Enums\ActionsPosition;
 
 class SeguimientoResource extends Resource
 {
@@ -35,9 +36,9 @@ class SeguimientoResource extends Resource
                     ->relationship('tipoSeguimiento', 'DesTipSeguimiento')    
                     ->label('Tipo de Contacto')
                     ->required(),
-                Forms\Components\TextArea::make('ObsIntSeguimiento')
+                Forms\Components\TextInput::make('ObsIntSeguimiento')
                     ->label('Observación')
-                    ->columnSpanFull()
+                    // ->columnSpanFull()
                     ->required()
                     ->maxLength(1000),
             ]);
@@ -64,7 +65,7 @@ class SeguimientoResource extends Resource
             ->actions([
                 // Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
-            ])
+            ], position: ActionsPosition::BeforeColumns)
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

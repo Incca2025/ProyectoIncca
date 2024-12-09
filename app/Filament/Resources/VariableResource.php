@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources;
+/* namespace App\Filament\Resources;
 
 use App\Filament\Resources\VariableResource\Pages;
 use App\Filament\Resources\VariableResource\RelationManagers;
@@ -88,3 +88,4 @@ class VariableResource extends Resource
         ];
     }
 }
+*/
