@@ -60,6 +60,10 @@ class ProgramaAcademicoResource extends Resource
                             $query->orderBy( 'IdTipPeriodo', 'ASC' );
                         })
                     ->required(),
+                Forms\Components\TextInput::make('CodProgAcademico')
+                    ->label('Código del Programa Académico')
+                    ->required()
+                    ->maxLength(15),
                 Forms\Components\TextInput::make('NumPeriodos')
                     ->label('Número de Periodos Académicos')
                     ->required()

@@ -56,6 +56,10 @@ class PensumResource extends Resource
                     ->required()
                     ->numeric()
                     ->minValue(1),
+                Forms\Components\TextInput::make('CodPensum')
+                    ->label('Código del Pensum')
+                    ->required()
+                    ->maxLength(15),
                 Forms\Components\Select::make('IdTipPeriodos')
                     ->relationship('periodos', 'DesTipPeriodos')
                     ->label('Periodos')

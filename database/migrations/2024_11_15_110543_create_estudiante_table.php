@@ -15,7 +15,7 @@ return new class extends Migration
             $table->foreignId('IdPersona')->primary()->constrained('personas', 'IdPersona');
             $table->string('CodEstudiante', 20);
             $table->string('EmailEstudiante', 80);
-            $table->unsignedInteger('EstEstudiante')->default(1);
+            $table->foreignId(column: 'IdEstEstudiante')->constrained('estud_estados', 'IdEstEstudiante');
             $table->timestamps();
         });
     }

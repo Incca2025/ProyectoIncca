@@ -24,7 +24,7 @@ class DepartamentoAsignaturaResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('DesDepartamento')
-		    ->label('Descripción del Departamento')
+                    ->label('Descripción del Departamento')
                     ->required()
                     ->maxLength(100),
             ]);
@@ -35,7 +35,7 @@ class DepartamentoAsignaturaResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('DesDepartamento')
-		    ->label('Descripción del Departamento')
+                    ->label('Descripción del Departamento')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Creado el')

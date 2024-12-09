@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedInteger('ResMen');
             $table->string('FecResMen', 45);
             $table->unsignedInteger('Snies');
+            $table->string('CodProgAcademico', 15);
             $table->foreignId('IdTipPeriodo')->constrained('tipperiodo', 'IdTipPeriodo');
             $table->unsignedInteger('NumPeriodos');
             $table->timestamps();

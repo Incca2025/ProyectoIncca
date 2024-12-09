@@ -16,11 +16,15 @@ class Estudiante extends Model
         'IdPersona',
         'CodEstudiante',
         'EmailEstudiante',
-        'EstEstudiante',
+        'IdEstEstudiante',
     ];
 
     public function personas() {
         return $this->belongsTo(Persona::class, 'IdPersona');
+    }
+
+    public function estud_estados() {
+        return $this->belongsTo(EstudEstado::class, 'IdEstEstudiante');
     }
 
 }

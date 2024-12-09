@@ -59,7 +59,93 @@ class DatabaseSeeder extends Seeder
                 'IdIntEstSeguimiento' => 5,
                 'DesIntEstSeguimiento' => 'Prematricula ',
                 'ActivaMatricula' => 1,
-            ]
+            ],
+        ]);
+
+        DB::table('inter_tipseguimiento')->insert([
+            [
+                'IdIntTipSeguimiento' => 1,
+                'DesTipSeguimiento' => 'Telefónico',
+                'InstTipSeguimiento' => 'Prueba Instructivo Telefónico',
+            ],
+            [
+                'IdIntTipSeguimiento' => 2,
+                'DesTipSeguimiento' => 'Email',
+                'InstTipSeguimiento' => 'Prueba Instructivo Email',
+            ],
+        ]);
+
+        DB::table('tipperiodo')->insert([
+            [
+                'IdTipPeriodo' => 1,
+                'DesTipPeriodo' => 'Semestral',
+            ],
+        ]);
+
+        DB::table('nivprograma')->insert([
+            [
+                'IdNivPrograma' => 1,
+                'DesPrograma' => 'Profesional',
+            ],
+        ]);
+
+        DB::table('progacademico')->insert([
+            [
+                'IdProgAcademico' => 1,
+                'NomProgAcademico' => 'Administración de empresas',
+                'IdNivPrograma' => 1,
+                'ResMen' => 16408,
+                'FecResMen' => '2013-11-18',
+                'Snies' => 14320,
+                'CodProgAcademico' => '101',
+                'IdTipPeriodo' => 1,
+                'NumPeriodos' => 9,
+            ],
+            [
+                'IdProgAcademico' => 2,
+                'NomProgAcademico' => 'Biología',
+                'IdNivPrograma' => 1,
+                'ResMen' => 2662,
+                'FecResMen' => '2020-02-21',
+                'Snies' => 1063,
+                'CodProgAcademico' => '102',
+                'IdTipPeriodo' => 1,
+                'NumPeriodos' => 10,
+            ],
+            [
+                'IdProgAcademico' => 3,
+                'NomProgAcademico' => 'Cultura física',
+                'IdNivPrograma' => 1,
+                'ResMen' => 7912,
+                'FecResMen' => '2020-05-20',
+                'Snies' => 1054,
+                'CodProgAcademico' => '103',
+                'IdTipPeriodo' => 1,
+                'NumPeriodos' => 10,
+            ],
+            [
+                'IdProgAcademico' => 4,
+                'NomProgAcademico' => 'Derecho - Bogotá',
+                'IdNivPrograma' => 1,
+                'ResMen' => 9114,
+                'FecResMen' => '2014-06-11',
+                'Snies' => 1056,
+                'CodProgAcademico' => '104',
+                'IdTipPeriodo' => 1,
+                'NumPeriodos' => 10,
+            ],
+        ]);
+
+        DB::table('interesado')->insert([
+            [
+                'IdInteresado' => 1,
+                'Nombres_Int' => 'Juan Pablo',
+                'Apellidos_Int' => 'Betancourt Vargas',
+                'Email_Int' => 'juanbetancourt0013@gmail.com',
+                'IdProgAcademico' => 3,
+                'Celular_Int' => '3222663866',
+                'IdIntEstSeguimiento' => 5,
+            ],
         ]);
 
         DB::table('variables')->insert([
@@ -72,7 +158,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'IdVariable' => 2,
-                'Variable' => 'paginaPrincipal',
+                'Variable' => 'paginaTrataDatos',
                 'DesVariable' => 'Pagina que describe el tratamiento de datos',
                 'NumVariable' => Null,
                 'TxtVariable' => 'https://unincca.edu.co/TDatos.html',
@@ -124,6 +210,148 @@ class DatabaseSeeder extends Seeder
                 'IdTipPeriodos' => 3,
                 'DesTipPeriodos' => 'Trimestre',
                 'NumMes' => 3,
+            ],
+        ]);
+
+        DB::table('tippaises')->insert([
+            [
+                'IdTipPais' => 1,
+                'CodPais' => '170',
+                'DesPais' => 'Colombia',
+            ],
+            [
+                'IdTipPais' => 2,
+                'CodPais' => '032',
+                'DesPais' => 'Argentina',
+            ],
+        ]);
+
+        DB::table('tipdepartamentos')->insert([
+            [
+                'IdTipDepartamento' => 1,
+                'CodDepartamento' => '5',
+                'DesDepartamento' => 'Antioquia',
+                'IdTipPais' => 1,
+            ],
+            [
+                'IdTipDepartamento' => 2,
+                'CodDepartamento' => '11',
+                'DesDepartamento' => 'Bogotá D.C.',
+                'IdTipPais' => 1,
+            ],
+        ]);
+
+        DB::table('tipmunicipios')->insert([
+            [
+                'IdTipMunicipio' => 1,
+                'CodMunicipio' => '5001',
+                'DesMunicipio' => 'Medellín',
+                'IdTipPais' => 1,
+                'IdTipDepartamento' => 1,
+            ],
+            [
+                'IdTipMunicipio' => 2,
+                'CodMunicipio' => '11001',
+                'DesMunicipio' => 'Bogotá D.C.',
+                'IdTipPais' => 1,
+                'IdTipDepartamento' => 2,
+            ],
+        ]);
+
+        DB::table('tipzonaresidencia')->insert([
+            [
+                'IdTipZonaResidencia' => 1,
+                'CodMenZResidencial' => '1',
+                'DesZonaResidencial' => 'Urbana',
+            ],
+        ]);
+
+        DB::table('tipdocidentidad')->insert([
+            [
+                'IdTipDocIdentidad' => 1,
+                'AbreDocIdentidad' => 'CC',
+                'DesDocidentidad' => 'Cédula de ciudadanía',
+                'DocDian' => 0,
+            ],
+        ]);
+
+        DB::table('tippueindigena')->insert([
+            [
+                'IdTipPueIndigena' => 1,
+                'CodMenPIndigena' => '0',
+                'DesPueIndigena' => 'No aplica',
+            ],
+        ]);
+
+        DB::table('tipveteranos')->insert([
+            [
+                'IdTipVeteranos' => 1,
+                'CodMenVetarno' => '1',
+                'DesVeterano' => 'Veterano',
+            ],
+        ]);
+
+        DB::table('tipgrupetnico')->insert([
+            [
+                'IdTipGrupEtnico' => 1,
+                'CodMenGEtnico' => '0',
+                'DesGrupEtnico' => 'No informa',
+            ],
+        ]);
+
+        DB::table('tipgenbiologico')->insert([
+            [
+                'IdTipGenBiologico' => 1,
+                'CodMenGBio' => '1',
+                'DesGenBiologico' => 'Hombre-Masculino',
+            ],
+        ]);
+
+        DB::table('tipestrato')->insert([
+            [
+                'IdTipEstrato' => 1,
+                'CodMenEstrato' => '0',
+                'DesEstrato' => 'No informa',
+            ],
+        ]);
+
+        DB::table('tipestcivil')->insert([
+            [
+                'IdTipEstCivil' => 1,
+                'CodMenEstCivil' => '1',
+                'DesEstCivil' => 'Soltero(a)',
+            ],
+        ]);
+
+        DB::table('tipdiscapacidad')->insert([
+            [
+                'IdTipDiscapacidad' => 1,
+                'CodMenDiscap' => '0',
+                'DesDiscapacidad' => 'No aplica',
+            ],
+        ]);
+
+        DB::table('tipcondiscapacidad')->insert([
+            [
+                'IdTipConDiscapacidad' => 1,
+                'CodMenCDiscap' => '0',
+                'DesConDiscapacidad' => 'No informa',
+            ],
+        ]);
+
+        DB::table('tipcomnegra')->insert([
+            [
+                'IdTipComNegra' => 1,
+                'CodMenCN' => '0',
+                'DesComNegra' => 'No aplica',
+            ],
+        ]);
+
+        DB::table('tipcapexcepcional')->insert([
+            [
+                'IdTipCapExcepcional' => 1,
+                'CodMenCExpc' => '0',
+                'DesCapExcepcional' => 'No aplica',
             ],
         ]);
 

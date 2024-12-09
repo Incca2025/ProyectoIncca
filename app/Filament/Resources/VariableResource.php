@@ -27,11 +27,14 @@ class VariableResource extends Resource
                     ->required()
                     ->maxLength(50),
                 Forms\Components\TextInput::make('DesVariable')
+                    ->label('Descripción de la Variable')
                     ->required()
                     ->maxLength(200),
                 Forms\Components\TextInput::make('NumVariable')
+                    ->label('Número de la Variable')
                     ->numeric(),
                 Forms\Components\TextInput::make('TxtVariable')
+                    ->label('Texto de la Variable')
                     ->required()
                     ->maxLength(1000),
             ]);
@@ -44,17 +47,22 @@ class VariableResource extends Resource
                 Tables\Columns\TextColumn::make('Variable')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('DesVariable')
+                    ->label('Descripción de la Variable')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('NumVariable')
+                    ->label('Número de la Variable')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('TxtVariable')
+                    ->label('Texto de la Variable')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Creado el')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Actualizado el')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

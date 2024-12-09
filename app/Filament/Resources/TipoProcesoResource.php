@@ -24,6 +24,7 @@ class TipoProcesoResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('DesTipProceso')
+                    ->label('Descripción del Tipo de Proceso')
                     ->required()
                     ->maxLength(30),
             ]);
@@ -34,12 +35,15 @@ class TipoProcesoResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('DesTipProceso')
+                    ->label('Descripción del Tipo de Proceso')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Creado el')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Actualizado el')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

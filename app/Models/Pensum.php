@@ -17,6 +17,7 @@ class Pensum extends Model
         'numCredAprob',
         'promMinimo',
         'numPeriodos',
+        'CodPensum',
         'IdTipPeriodos',
     ];
 

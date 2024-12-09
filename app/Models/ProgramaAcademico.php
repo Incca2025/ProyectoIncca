@@ -15,6 +15,7 @@ class ProgramaAcademico extends Model
         'ResMen', 
         'FecResMen', 
         'Snies', 
+        'CodProgAcademico',
         'IdTipPeriodo', 
         'NumPeriodos', 
     ];

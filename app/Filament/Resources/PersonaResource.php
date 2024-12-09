@@ -40,10 +40,12 @@ class PersonaResource extends Resource
                 Forms\Components\Select::make('IdTipDocIdentidad')
                     ->relationship('tipoDocumento', 'DesDocidentidad')
                     ->label('Tipo de Documento')
+                    ->visible(fn (string $operation) => $operation  === 'create')
                     ->required(),
                 Forms\Components\TextInput::make('NumDocIdentidad')
                     ->required()
                     ->label('Documento de Identidad')
+                    ->visible(fn (string $operation) => $operation  === 'create')
                     ->unique(ignorable: fn ($record) => $record)
                     ->maxLength(45),
                 Forms\Components\TextInput::make('PriApellido')
@@ -71,11 +73,6 @@ class PersonaResource extends Resource
                     ->email()
                     ->required()
                     ->label('Correo Electrónico Personal')
-                    ->maxLength(45),
-                Forms\Components\TextInput::make('MailInstitucional')
-                    ->email()
-                    ->required()
-                    ->label('Correo Electrónico Institucional')
                     ->maxLength(45),
                 Forms\Components\DatePicker::make('FecNacimiento')
                     ->label('Fecha de Nacimiento')
@@ -222,7 +219,6 @@ class PersonaResource extends Resource
                 Forms\Components\Select::make('IdTipZonaResidencia')
                     ->relationship('zonaResidencia', 'DesZonaResidencial')
                     ->required(),
-
             ]);
     }
 
@@ -260,9 +256,6 @@ class PersonaResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('MailPersonal')
                     ->label('Correo Electrónico Personal')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('MailInstitucional')
-                    ->label('Correo Electrónico Institucional')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('FecNacimiento')
                     ->label('Fecha de Nacimiento')

@@ -21,6 +21,8 @@ use App\Filament\Resources\InteresadoResource;
 use App\Filament\Resources\SeguimientoResource;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Actions\CreateAction;
+use Filament\Notifications\Notification;
 
 class SeguimientosRelationManager extends RelationManager
 {
@@ -41,9 +43,7 @@ class SeguimientosRelationManager extends RelationManager
                                 $instructivos = Cache::rememberForever('instructivos', function () {
                                     return TipoSeguimiento::pluck('InstTipSeguimiento', 'IdIntTipSeguimiento');
                                 });
-                                $set('InstTipSeguimiento', $instructivos[$state] ?? null); 
-				/* $instructivos = TipoSeguimiento::pluck('InstTipSeguimiento', 'IdIntTipSeguimiento');
-        			$set('InstTipSeguimiento', $instructivos[$state] ?? null); */ 
+                                $set('InstTipSeguimiento', $instructivos[$state] ?? null);
                             })
                             ->required(),
                         Forms\Components\Textarea::make('ObsIntSeguimiento')
@@ -53,12 +53,7 @@ class SeguimientosRelationManager extends RelationManager
                         Forms\Components\Textarea::make('InstTipSeguimiento')
                             ->label('Instructivo')
                             ->rows(4)
-                            ->readOnly()
-                            // ->default(fn (Get $get) => TipoSeguimiento::query()
-                            //     ->where('IdIntTipSeguimiento', $get('IdIntTipSeguimiento'))
-                            //     ->value('InstTipSeguimiento'))
-                            // ->live()
-                            // ->nullable()
+                            ->readOnly(),
                     ])
                 ])->columnSpanFull()
             ]);
@@ -86,8 +81,20 @@ class SeguimientosRelationManager extends RelationManager
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make()
-                    ->createAnother(false)
-                    ->modalSubmitActionLabel('Grabar')
+                    ->createAnother(condition: false)
+                    
+                    // ->after(function (Seguimiento $record) {
+                    //     $nuevoEstado = $data['DesIntEstSeguimiento'] ?? null; // Captura del formulario
+                    //     // Lógica adicional después de crear el seguimiento
+                        
+                    //     $record->interesado()->update([
+                    //         'IdIntEstSeguimiento' => $nuevoEstado, // Actualiza el estado del interesado
+                    //     ]);
+
+                    //     // Redirige a otra página
+                    //     // return redirect()->route('ruta.formulario.adicional', ['id' => $record->interesado->id]);
+                    // }),
+                
                 // Action::make('Nuevo')
                 //     ->url(fn () => SeguimientoResource::getUrl('create'))
                 //     ->icon('heroicon-o-plus')

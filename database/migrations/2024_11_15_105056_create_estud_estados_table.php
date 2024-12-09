@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('estud_estados', function (Blueprint $table) {
             $table->unsignedBigInteger('IdEstEstudiante')->primary();
             $table->string('DesEstEstudiante', 20);
-            $table->unsignedInteger('ActEstEstudiante')->default(1);   
+            $table->unsignedInteger('ActEstEstudiante')->default(1); // Estudiante Activo todavía en la institución o no
             $table->timestamps();
         });
     }

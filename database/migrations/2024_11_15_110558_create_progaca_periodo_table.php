@@ -12,14 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('progaca_periodo', function (Blueprint $table) {
+            $table->id('IdProgAcaPeriodo');
             $table->foreignId('IdProgAcademico')->constrained('progacademico', 'IdProgAcademico');
             $table->unsignedBigInteger('Peracademico');
-            $table->primary(['IdProgAcademico', 'Peracademico']);
+            $table->unique(['IdProgAcademico', 'Peracademico']);
             $table->decimal('ValMatNuevos', 10, 2);
             $table->date('FecIniInscripciones');
             $table->date('FecFinInscripciones');
             $table->date('FecIniMatriculas');
             $table->date('FecFinMatriculas');
+            $table->date('FecIniClases');
+            $table->date('FecFinClases');
             $table->timestamps();
         });
     }
