@@ -31,4 +31,9 @@ class Pensum extends Model
         return $this->belongsTo(PeriodoPensum::class, 'IdTipPeriodos');
     }
 
+    public function progacaperiodos()
+    {
+        return $this->belongsTo(ProgacaPeriodo::class, 'perAcademico_Inicial');
+    }
+
 }

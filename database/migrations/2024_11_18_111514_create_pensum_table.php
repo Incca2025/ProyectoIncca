@@ -14,13 +14,14 @@ return new class extends Migration
         Schema::create('pensum', function (Blueprint $table) {
             $table->id('IdPensum');
             $table->foreignId('IdProgAcademico')->constrained('progacademico', 'IdProgAcademico');
-            $table->string('perAcademico_Inicial', 45);
-            $table->string('perAcademico_Final', 45)->nullable();
+            $table->foreignId('perAcademico_Inicial')->constrained('progaca_periodo', 'IdProgAcaPeriodo');
+            $table->foreignId('perAcademico_Final')->nullable()->constrained('progaca_periodo', 'IdProgAcaPeriodo');
             $table->string('desPensum', 40);
             $table->unsignedInteger('numCredAprob');
             $table->decimal('promMinimo', 4, 2);
             $table->unsignedInteger('numPeriodos');
             $table->string('CodPensum', 15);
+            $table->unique(['IdProgAcademico', 'CodPensum']);
             $table->foreignId('IdTipPeriodos')->constrained('tip_periodopensum', 'IdTipPeriodos');
 	    $table->timestamps();
         });

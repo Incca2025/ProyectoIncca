@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Enums\ActionsPosition;
 
 class PensumAsignaturaResource extends Resource
 {
@@ -23,12 +24,20 @@ class PensumAsignaturaResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\Select::make('IdPensum')
+                    ->relationship('pensum', 'desPensum')
+                    ->label(label: 'Pensum')
+                    ->required(),
                 Forms\Components\TextInput::make('numPeriodo')
                     ->label('Número de periodo')
                     ->required()
                     ->numeric()
                     ->default(1)
                     ->minValue(1),
+                Forms\Components\Select::make('IdAsignatura')
+                    ->relationship('asignaturas', 'DesAsignatura')
+                    ->label(label: 'Asignatura')
+                    ->required(),
                 Forms\Components\TextInput::make('Electiva')
                     ->label('Electiva')
                     ->required()
@@ -40,15 +49,18 @@ class PensumAsignaturaResource extends Resource
                     ->required()
                     ->numeric()
                     ->default(0)
+                    ->minValue(1),
+                Forms\Components\TextInput::make('NumCreditosPreRequisito')
+                    ->label('Número de créditos pre-requisito')
+                    ->required()
+                    ->numeric()
+                    ->default(0)
                     ->minValue(0),
-                Forms\Components\Select::make('IdPensum')
-                    ->relationship('pensum', 'desPensum')
-                    ->label(label: 'Pensum')
-                    ->required(),
-                Forms\Components\Select::make('IdAsignatura')
-                    ->relationship('asignaturas', 'DesAsignatura')
-                    ->label(label: 'Asignatura')
-                    ->required(),
+                Forms\Components\TextInput::make('NumHorClase')
+                    ->label('Número de horas de clase')
+                    ->required()
+                    ->numeric()
+                    ->minValue(0),
             ]);
     }
 
@@ -56,9 +68,15 @@ class PensumAsignaturaResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('pensum.desPensum')
+                    ->label(label: 'Pensum')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('numPeriodo')
                     ->label('Número de periodo')
                     ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('asignaturas.DesAsignatura')
+                    ->label(label: 'Asignatura')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('Electiva')
                     ->label('Electiva')
@@ -68,11 +86,13 @@ class PensumAsignaturaResource extends Resource
                     ->label(label: 'Número de créditos')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('pensum.desPensum')
-                    ->label(label: 'Pensum')
+                Tables\Columns\TextColumn::make('NumCreditosPreRequisito')
+                    ->label(label: 'Número de créditos pre-requisito')
+                    ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('asignaturas.DesAsignatura')
-                    ->label(label: 'Asignatura')
+                Tables\Columns\TextColumn::make('NumHorClase')
+                    ->label(label: 'Número de horas de clase')
+                    ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Creado el')
@@ -90,7 +110,7 @@ class PensumAsignaturaResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-            ])
+            ], position: ActionsPosition::BeforeColumns)
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

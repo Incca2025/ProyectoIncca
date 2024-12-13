@@ -9,10 +9,13 @@ use Filament\Tables\Table;
 use App\Models\ProgacaPeriodo;
 use Illuminate\Validation\Rule;
 use Filament\Resources\Resource;
+use Filament\Forms\Components\Group;
+use Filament\Forms\Components\Section;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\ProgacaPeriodoResource\Pages;
 use App\Filament\Resources\ProgacaPeriodoResource\RelationManagers;
+use Filament\Tables\Enums\ActionsPosition;
 
 class ProgacaPeriodoResource extends Resource
 {
@@ -28,43 +31,50 @@ class ProgacaPeriodoResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('IdProgAcademico')
-                    ->relationship('programaAcademico', 'NomProgAcademico')
-                    ->label('Programa Académico')
-                    ->unique()
-                    ->required(),
-                Forms\Components\TextInput::make('Peracademico')
-                    ->label('Periodo Académico')
-                    ->required()
-                    // ->rule(function () {
-                    //     return Rule::unique('progaca_periodo') // Tabla de tu base de datos
-                    //         ->where('IdProgAcademico', request()->input('IdProgAcademico'))
-                    //         ->ignore(request()->route('record')); // Ignora el registro actual
-                    // })
-                    // ->helperText('La combinación del programa académico y periodo debe ser única.')
-                    ->numeric(),
-                Forms\Components\TextInput::make('ValMatNuevos')
-                    ->label('Valor de matrículas estudiantes nuevos')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\DatePicker::make('FecIniInscripciones')
-                    ->label('Fecha inicial de inscripciones')
-                    ->required(),
-                Forms\Components\DatePicker::make('FecFinInscripciones')
-                    ->label('Fecha final de inscripciones')
-                    ->required(),
-                Forms\Components\DatePicker::make('FecIniMatriculas')
-                    ->label('Fecha inicial de matrículas')
-                    ->required(),
-                Forms\Components\DatePicker::make('FecFinMatriculas')
-                    ->label('Fecha final de matrículas')
-                    ->required(),
-                Forms\Components\DatePicker::make('FecIniClases')
-                    ->label('Fecha inicial de clases')
-                    ->required(),
-                Forms\Components\DatePicker::make('FecFinClases')
-                    ->label('Fecha final de clases')
-                    ->required(),
+                Section::make()->schema([
+                    Forms\Components\Select::make('IdProgAcademico')
+                        ->relationship('programaAcademico', 'NomProgAcademico')
+                        ->label('Programa Académico')
+                        ->required(),
+                    Forms\Components\TextInput::make('Peracademico')
+                        ->label('Periodo Académico')
+                        ->required()
+                        ->minValue(1)
+                        // ->rule(function () {
+                        //     return Rule::unique('progaca_periodo') // Tabla de tu base de datos
+                        //         ->where('IdProgAcademico', request()->input('IdProgAcademico'))
+                        //         ->ignore(request()->route('record')); // Ignora el registro actual
+                        // })
+                        // ->helperText('La combinación del programa académico y periodo debe ser única.')
+                        ->numeric(),
+                    Forms\Components\TextInput::make('ValMatNuevos')
+                        ->label('Valor de matrículas estudiantes nuevos')
+                        ->inputMode('decimal')
+                        ->minValue(1)
+                        ->required()
+                        ->numeric(),
+                    ]),
+                        
+                Section::make()->schema([
+                    Forms\Components\DatePicker::make('FecIniInscripciones')
+                        ->label('Fecha inicial de inscripciones')
+                        ->required(),
+                    Forms\Components\DatePicker::make('FecFinInscripciones')
+                        ->label('Fecha final de inscripciones')
+                        ->required(),
+                    Forms\Components\DatePicker::make('FecIniMatriculas')
+                        ->label('Fecha inicial de matrículas')
+                        ->required(),
+                    Forms\Components\DatePicker::make('FecFinMatriculas')
+                        ->label('Fecha final de matrículas')
+                        ->required(),
+                    Forms\Components\DatePicker::make('FecIniClases')
+                        ->label('Fecha inicial de clases')
+                        ->required(),
+                    Forms\Components\DatePicker::make('FecFinClases')
+                        ->label('Fecha final de clases')
+                        ->required(),
+                ])->columns(2)
             ]);
     }
 
@@ -77,7 +87,6 @@ class ProgacaPeriodoResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('Peracademico')
                     ->label('Periodo Académico')
-                    ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('ValMatNuevos')
                     ->label('Valor de matrículas estudiantes nuevos')
@@ -123,7 +132,7 @@ class ProgacaPeriodoResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-            ])
+            ], position: ActionsPosition::BeforeColumns)
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

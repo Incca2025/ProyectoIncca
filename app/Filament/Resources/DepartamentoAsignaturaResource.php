@@ -23,6 +23,11 @@ class DepartamentoAsignaturaResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\TextInput::make('CodDepartamento')
+                    ->label('Código')
+                    ->unique(ignorable: fn ($record) => $record)
+                    ->required()
+                    ->maxLength(15),
                 Forms\Components\TextInput::make('DesDepartamento')
                     ->label('Descripción del Departamento')
                     ->required()
@@ -34,6 +39,9 @@ class DepartamentoAsignaturaResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('CodDepartamento')
+                    ->label('Código')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('DesDepartamento')
                     ->label('Descripción del Departamento')
                     ->searchable(),

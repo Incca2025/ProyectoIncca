@@ -75,17 +75,28 @@ class DatabaseSeeder extends Seeder
             ],
         ]);
 
-        DB::table('tipperiodo')->insert([
-            [
-                'IdTipPeriodo' => 1,
-                'DesTipPeriodo' => 'Semestral',
-            ],
-        ]);
-
         DB::table('nivprograma')->insert([
             [
                 'IdNivPrograma' => 1,
                 'DesPrograma' => 'Profesional',
+            ],
+        ]);
+
+        DB::table('tip_periodopensum')->insert([
+            [
+                'IdTipPeriodos' => 1,
+                'DesTipPeriodos' => 'Semestre',
+                'NumMes' => 6,
+            ],
+            [
+                'IdTipPeriodos' => 2,
+                'DesTipPeriodos' => 'Cuatrimestre',
+                'NumMes' => 4,
+            ],
+            [
+                'IdTipPeriodos' => 3,
+                'DesTipPeriodos' => 'Trimestre',
+                'NumMes' => 3,
             ],
         ]);
 
@@ -98,7 +109,7 @@ class DatabaseSeeder extends Seeder
                 'FecResMen' => '2013-11-18',
                 'Snies' => 14320,
                 'CodProgAcademico' => '101',
-                'IdTipPeriodo' => 1,
+                'IdTipPeriodos' => 1,
                 'NumPeriodos' => 9,
             ],
             [
@@ -109,7 +120,7 @@ class DatabaseSeeder extends Seeder
                 'FecResMen' => '2020-02-21',
                 'Snies' => 1063,
                 'CodProgAcademico' => '102',
-                'IdTipPeriodo' => 1,
+                'IdTipPeriodos' => 1,
                 'NumPeriodos' => 10,
             ],
             [
@@ -120,7 +131,7 @@ class DatabaseSeeder extends Seeder
                 'FecResMen' => '2020-05-20',
                 'Snies' => 1054,
                 'CodProgAcademico' => '103',
-                'IdTipPeriodo' => 1,
+                'IdTipPeriodos' => 1,
                 'NumPeriodos' => 10,
             ],
             [
@@ -131,7 +142,7 @@ class DatabaseSeeder extends Seeder
                 'FecResMen' => '2014-06-11',
                 'Snies' => 1056,
                 'CodProgAcademico' => '104',
-                'IdTipPeriodo' => 1,
+                'IdTipPeriodos' => 1,
                 'NumPeriodos' => 10,
             ],
         ]);
@@ -193,24 +204,6 @@ class DatabaseSeeder extends Seeder
                 'DesEstEstudiante' => 'Graduado',
                 'ActEstEstudiante' => 0,
             ]
-        ]);
-
-        DB::table('tip_periodopensum')->insert([
-            [
-                'IdTipPeriodos' => 1,
-                'DesTipPeriodos' => 'Semestre',
-                'NumMes' => 6,
-            ],
-            [
-                'IdTipPeriodos' => 2,
-                'DesTipPeriodos' => 'Cuatrimestre',
-                'NumMes' => 4,
-            ],
-            [
-                'IdTipPeriodos' => 3,
-                'DesTipPeriodos' => 'Trimestre',
-                'NumMes' => 3,
-            ],
         ]);
 
         DB::table('tippaises')->insert([

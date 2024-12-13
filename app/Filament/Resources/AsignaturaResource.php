@@ -25,6 +25,7 @@ class AsignaturaResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('CodAsignatura')
                     ->label('Código de la Asignatura')
+                    ->unique(ignorable: fn ($record) => $record)
                     ->required()
                     ->maxLength(20),
                 Forms\Components\TextInput::make('DesAsignatura')
@@ -32,7 +33,7 @@ class AsignaturaResource extends Resource
                     ->required()
                     ->maxLength(200),
                 Forms\Components\Select::make('IdDepartamento')
-	            ->relationship('departamento', 'DesDepartamento')
+                    ->relationship('departamento', 'DesDepartamento')
                     ->required(),
             ]);
     }

@@ -16,7 +16,7 @@ class ProgramaAcademico extends Model
         'FecResMen', 
         'Snies', 
         'CodProgAcademico',
-        'IdTipPeriodo', 
+        'IdTipPeriodos', 
         'NumPeriodos', 
     ];
 
@@ -27,7 +27,7 @@ class ProgramaAcademico extends Model
 
     public function periodo()
     {
-        return $this->belongsTo(PeriodoAcademico::class, 'IdTipPeriodo');
+        return $this->belongsTo(PeriodoPensum::class, 'IdTipPeriodos');
     }
 
     public function interesados()

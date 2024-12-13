@@ -12,12 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pen_asignatura', function (Blueprint $table) {
-            $table->id('idPen_Asignatura');
+            $table->id('IdPen_Asignatura');
             $table->unsignedInteger('numPeriodo')->default(1);
             $table->unsignedInteger('Electiva')->default(0);
             $table->unsignedInteger('numCreditos')->default(0);
             $table->foreignId('IdPensum')->constrained('pensum', 'IdPensum');
             $table->foreignId('IdAsignatura')->constrained('asignaturas', 'IdAsignatura');
+            $table->unsignedInteger('NumCreditosPreRequisito')->default(0);
+            $table->unsignedInteger('NumHorClase');
             $table->timestamps();
         });
     }

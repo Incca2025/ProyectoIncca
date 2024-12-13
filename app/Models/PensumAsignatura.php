@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class PensumAsignatura extends Model
 {
     protected $table = 'pen_asignatura';
-    protected $primaryKey = 'idPen_Asignatura';
+    protected $primaryKey = 'IdPen_Asignatura';
     
     protected $fillable = [
         'numPeriodo',
@@ -15,6 +15,8 @@ class PensumAsignatura extends Model
         'numCreditos',
         'IdPensum',
         'IdAsignatura',
+        'NumCreditosPreRequisito',
+        'NumHorClase',
     ];
 
     public function pensum()

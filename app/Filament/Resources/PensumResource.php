@@ -27,14 +27,14 @@ class PensumResource extends Resource
                     ->relationship('programas', 'NomProgAcademico')
                     ->label('Programa')
                     ->required(),
-                Forms\Components\TextInput::make('perAcademico_Inicial')
+                Forms\Components\Select::make('perAcademico_Inicial')
+                    ->relationship('progacaperiodos', 'Peracademico')
                     ->label('Periodo Académico Inicial')
                     ->required()
                     ->maxLength(45),
-                Forms\Components\TextInput::make('perAcademico_Final')
-                    ->label('Periodo Académico Final')
-                    ->required()
-                    ->maxLength(45),
+                Forms\Components\Select::make('perAcademico_Final')
+                    ->relationship('progacaperiodos', 'Peracademico')
+                    ->label('Periodo Académico Final'),
                 Forms\Components\TextInput::make('desPensum')
                     ->label('Descripción del Pensum')
                     ->required()

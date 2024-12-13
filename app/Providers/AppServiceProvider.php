@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use PulkitJalan\Google\Client as GoogleClient;
 use BezhanSalleh\FilamentLanguageSwitch\LanguageSwitch;
 
 class AppServiceProvider extends ServiceProvider
@@ -12,7 +13,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton('google', function () {
+            $config = config('google'); // Carga la configuración desde config/google.php
+            return new GoogleClient($config);
+        });
     }
 
     /**

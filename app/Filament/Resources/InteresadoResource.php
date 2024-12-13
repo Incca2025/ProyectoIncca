@@ -114,6 +114,19 @@ class InteresadoResource extends Resource
                     ->label('Seguimientos')
                     ->color('primary')
                     ->icon('heroicon-o-eye'),
+                Action::make('probarGoogleClient')
+                    ->label('Probar Cliente Google')
+                    ->action(function () {
+                        try {
+                            $googleClient = app('google'); // Carga el cliente de Google.
+                            $clientInfo = $googleClient->getClient(); // Prueba básica para obtener información.
+                            dd($clientInfo); // Muestra la información para depuración.
+                        } catch (\Exception $e) {
+                            dd('Error:', $e->getMessage());
+                        }
+                    })
+                    ->color('success')
+                    ->icon('heroicon-o-check'),
             ], position: ActionsPosition::BeforeColumns)
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -14,4 +14,9 @@ class PeriodoPensum extends Model
         'NumMes'
     ];
 
+    public function programas()
+    {
+        return $this->hasMany(ProgramaAcademico::class);
+    }
+
 }

@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('progacademico', function (Blueprint $table) {
             $table->id('IdProgAcademico');
-            $table->string('NomProgAcademico');
+            $table->string('NomProgAcademico', 150);
             $table->foreignId('IdNivPrograma')->constrained('nivprograma', 'IdNivPrograma');
-            $table->unsignedInteger('ResMen');
-            $table->string('FecResMen', 45);
-            $table->unsignedInteger('Snies');
-            $table->string('CodProgAcademico', 15);
-            $table->foreignId('IdTipPeriodo')->constrained('tipperiodo', 'IdTipPeriodo');
+            $table->string('ResMen', 15);
+            $table->date('FecResMen');
+            $table->string('Snies', 15);
+            $table->string('CodProgAcademico', 15)->unique();
+            $table->foreignId('IdTipPeriodos')->constrained('tip_periodopensum', 'IdTipPeriodos');
             $table->unsignedInteger('NumPeriodos');
             $table->timestamps();
 

@@ -123,4 +123,8 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'aliases' => [
+        'Google' => PulkitJalan\Google\Facades\Google::class,
+    ],
+
 ];

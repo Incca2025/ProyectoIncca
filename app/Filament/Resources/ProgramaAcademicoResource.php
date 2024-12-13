@@ -35,6 +35,11 @@ class ProgramaAcademicoResource extends Resource
                     ->label('Nombre del Programa Académico')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\TextInput::make('CodProgAcademico')
+                    ->label('Código del Programa Académico')
+                    ->unique(ignorable: fn ($record) => $record)
+                    ->required()
+                    ->maxLength(15),
                 Forms\Components\Select::make('IdNivPrograma')
                     ->label('Nivel del Programa Académico')
                     ->relationship('nivel', 'DesPrograma', 
@@ -42,32 +47,26 @@ class ProgramaAcademicoResource extends Resource
                             $query->orderBy( 'IdNivPrograma', 'ASC' );
                         })
                     ->required(),
-                Forms\Components\TextInput::make('ResMen')
-                    ->label('Resolución')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('FecResMen')
-                    ->label('Fecha de la Resolución')
-                    ->required()
-                    ->maxLength(45),
-                Forms\Components\TextInput::make('Snies')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\Select::make('IdTipPeriodo')
-                    ->label('Periodo Académico')
-                    ->relationship('periodo', 'DesTipPeriodo', 
-                        function ( Builder $query ) {
-                            $query->orderBy( 'IdTipPeriodo', 'ASC' );
-                        })
-                    ->required(),
-                Forms\Components\TextInput::make('CodProgAcademico')
-                    ->label('Código del Programa Académico')
-                    ->required()
-                    ->maxLength(15),
                 Forms\Components\TextInput::make('NumPeriodos')
                     ->label('Número de Periodos Académicos')
-                    ->required()
-                    ->numeric(),
+                    ->numeric()
+                    ->minValue(1)
+                    ->required(),
+                Forms\Components\Select::make('IdTipPeriodos')
+                    ->label('Periodo Académico')
+                    ->relationship('periodo', 'DesTipPeriodos', 
+                        function ( Builder $query ) {
+                            $query->orderBy( 'IdTipPeriodos', 'ASC' );
+                        })
+                    ->required(),
+                Forms\Components\TextInput::make('Snies')
+                    ->required(),
+                Forms\Components\TextInput::make('ResMen')
+                    ->label('Resolución')
+                    ->required(),
+                Forms\Components\DatePicker::make('FecResMen')
+                    ->label('Fecha de la Resolución')
+                    ->required(),
             ]);
     }
 
@@ -78,8 +77,21 @@ class ProgramaAcademicoResource extends Resource
                 Tables\Columns\TextColumn::make('NomProgAcademico')
                     ->label('Nombre del Programa Académico')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('CodProgAcademico')
+                    ->label('Código del Programa Académico')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('nivel.DesPrograma')
                     ->label('Nivel del Programa Académico')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('NumPeriodos')
+                    ->label('Número de Periodos Académicos')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('periodo.DesTipPeriodos')
+                    ->label('Periodo Académico')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('Snies')
+                    ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('ResMen')
                     ->label('Resolución')
@@ -88,16 +100,6 @@ class ProgramaAcademicoResource extends Resource
                 Tables\Columns\TextColumn::make('FecResMen')
                     ->label('Fecha de la Resolución')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('Snies')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('periodo.DesTipPeriodo')
-                    ->label('Periodo Académico')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('NumPeriodos')
-                    ->label('Número de Periodos Académicos')
-                    ->numeric()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Creado el')
                     ->dateTime()
