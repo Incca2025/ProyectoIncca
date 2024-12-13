@@ -49,7 +49,7 @@ class PensumAsignaturaResource extends Resource
                     ->required()
                     ->numeric()
                     ->default(0)
-                    ->minValue(1),
+                    ->minValue(0),
                 Forms\Components\TextInput::make('NumCreditosPreRequisito')
                     ->label('Número de créditos pre-requisito')
                     ->required()

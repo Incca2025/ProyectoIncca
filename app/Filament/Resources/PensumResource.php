@@ -30,8 +30,7 @@ class PensumResource extends Resource
                 Forms\Components\Select::make('perAcademico_Inicial')
                     ->relationship('progacaperiodos', 'Peracademico')
                     ->label('Periodo Académico Inicial')
-                    ->required()
-                    ->maxLength(45),
+                    ->required(),
                 Forms\Components\Select::make('perAcademico_Final')
                     ->relationship('progacaperiodos', 'Peracademico')
                     ->label('Periodo Académico Final'),
