@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Enums\ActionsPosition;
 
 class GeneroBiologicoResource extends Resource
 {
@@ -49,9 +50,11 @@ class GeneroBiologicoResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('CodMenGBio')
                     ->label('Código')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('DesGenBiologico')
                     ->label('Género Biológico')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Creado el')
@@ -69,7 +72,7 @@ class GeneroBiologicoResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-            ])
+            ], position: ActionsPosition::BeforeColumns)
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

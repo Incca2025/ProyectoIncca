@@ -10,6 +10,11 @@ class EditRoles extends EditRecord
 {
     protected static string $resource = RolesResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        return RolesResource::getUrl('index');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

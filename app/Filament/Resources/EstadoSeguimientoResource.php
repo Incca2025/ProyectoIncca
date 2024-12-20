@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Enums\ActionsPosition;
 
 class EstadoSeguimientoResource extends Resource
 {
@@ -52,17 +53,29 @@ class EstadoSeguimientoResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('DesIntEstSeguimiento')
                     ->label('Descripción del Estado de Seguimiento')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('ActivaMatricula')
+                    ->sortable()
                     ->label('Matrícula Activa')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Creado el')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Actualizado el')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-            ])
+            ], position: ActionsPosition::BeforeColumns)
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

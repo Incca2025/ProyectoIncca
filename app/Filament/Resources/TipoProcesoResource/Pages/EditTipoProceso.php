@@ -10,6 +10,11 @@ class EditTipoProceso extends EditRecord
 {
     protected static string $resource = TipoProcesoResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        return TipoProcesoResource::getUrl('index');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

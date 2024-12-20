@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Enums\ActionsPosition;
 
 class AsignaturaResource extends Resource
 {
@@ -34,6 +35,8 @@ class AsignaturaResource extends Resource
                     ->maxLength(200),
                 Forms\Components\Select::make('IdDepartamento')
                     ->relationship('departamento', 'DesDepartamento')
+                    ->searchable()
+                    ->preload()
                     ->required(),
             ]);
     }
@@ -44,12 +47,15 @@ class AsignaturaResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('CodAsignatura')
                     ->label('Código de la Asignatura')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('DesAsignatura')
                     ->label('Descripción de la Asignatura')
-		    ->searchable(),
+                    ->sortable()
+		            ->searchable(),
                 Tables\Columns\TextColumn::make('departamento.DesDepartamento')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Creado el')
                     ->dateTime()
@@ -57,7 +63,7 @@ class AsignaturaResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->label('Actualizado el')
-		    ->dateTime()
+		            ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
@@ -66,7 +72,7 @@ class AsignaturaResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-            ])
+            ], position: ActionsPosition::BeforeColumns)
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

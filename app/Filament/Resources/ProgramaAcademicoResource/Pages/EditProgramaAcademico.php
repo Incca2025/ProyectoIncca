@@ -10,6 +10,11 @@ class EditProgramaAcademico extends EditRecord
 {
     protected static string $resource = ProgramaAcademicoResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        return ProgramaAcademicoResource::getUrl('index');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

@@ -10,6 +10,11 @@ class EditTipoDocumento extends EditRecord
 {
     protected static string $resource = TipoDocumentoResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        return TipoDocumentoResource::getUrl('index');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

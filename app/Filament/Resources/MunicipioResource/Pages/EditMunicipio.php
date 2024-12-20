@@ -10,6 +10,11 @@ class EditMunicipio extends EditRecord
 {
     protected static string $resource = MunicipioResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        return MunicipioResource::getUrl('index');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

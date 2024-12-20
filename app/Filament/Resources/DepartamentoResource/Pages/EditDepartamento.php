@@ -10,6 +10,11 @@ class EditDepartamento extends EditRecord
 {
     protected static string $resource = DepartamentoResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        return DepartamentoResource::getUrl('index');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

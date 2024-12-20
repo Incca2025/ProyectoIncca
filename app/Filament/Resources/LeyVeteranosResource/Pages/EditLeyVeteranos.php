@@ -10,6 +10,11 @@ class EditLeyVeteranos extends EditRecord
 {
     protected static string $resource = LeyVeteranosResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        return LeyVeteranosResource::getUrl('index');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

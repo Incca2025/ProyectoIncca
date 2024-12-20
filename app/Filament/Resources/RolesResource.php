@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Enums\ActionsPosition;
 
 class RolesResource extends Resource
 {
@@ -48,9 +49,11 @@ class RolesResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('rol')
                     ->label('Rol')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('descripcion')
                     ->label('Descripción')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Creado el')
@@ -68,7 +71,7 @@ class RolesResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-            ])
+            ], position: ActionsPosition::BeforeColumns)
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

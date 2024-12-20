@@ -10,4 +10,17 @@ class CreateInteresado extends CreateRecord
 {
     protected static string $resource = InteresadoResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        return InteresadoResource::getUrl('index');
+    }
+
+    protected function getFormActions(): array
+    {
+        return [
+            $this->getCreateFormAction(),
+            $this->getCancelFormAction(),
+        ];
+    }
+
 }

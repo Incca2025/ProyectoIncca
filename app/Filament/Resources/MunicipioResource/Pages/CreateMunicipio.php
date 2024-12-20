@@ -9,4 +9,19 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateMunicipio extends CreateRecord
 {
     protected static string $resource = MunicipioResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        return MunicipioResource::getUrl('index');
+    }
+
+    protected function getFormActions(): array
+    {
+        return [
+            $this->getCreateFormAction(),
+            $this->getCancelFormAction(),
+        ];
+    }
+
 }
+

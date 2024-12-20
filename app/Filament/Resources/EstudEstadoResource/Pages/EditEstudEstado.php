@@ -10,6 +10,11 @@ class EditEstudEstado extends EditRecord
 {
     protected static string $resource = EstudEstadoResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        return EstudEstadoResource::getUrl('index');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

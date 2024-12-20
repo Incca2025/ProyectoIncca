@@ -10,6 +10,11 @@ class EditNivelPrograma extends EditRecord
 {
     protected static string $resource = NivelProgramaResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        return NivelProgramaResource::getUrl('index');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

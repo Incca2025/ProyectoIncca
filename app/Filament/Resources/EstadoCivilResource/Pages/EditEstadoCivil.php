@@ -10,6 +10,11 @@ class EditEstadoCivil extends EditRecord
 {
     protected static string $resource = EstadoCivilResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        return EstadoCivilResource::getUrl('index');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

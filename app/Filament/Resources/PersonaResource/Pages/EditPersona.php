@@ -10,6 +10,11 @@ class EditPersona extends EditRecord
 {
     protected static string $resource = PersonaResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        return PersonaResource::getUrl('index');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

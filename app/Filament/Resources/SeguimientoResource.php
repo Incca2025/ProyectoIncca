@@ -51,13 +51,26 @@ class SeguimientoResource extends Resource
                 Tables\Columns\TextColumn::make('interesado.Nombres_Int')
                     ->label('Interesado')
                     ->sortable()
-                    ->formatStateUsing(fn ($record) => $record->interesado->Nombres_Int . ' ' . $record->interesado->Apellidos_Int),
+                    ->formatStateUsing(fn ($record) => $record->interesado->Nombres_Int . ' ' . $record->interesado->Apellidos_Int)
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('tipoSeguimiento.DesTipSeguimiento')
                     ->label('Tipo de Contacto')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('ObsIntSeguimiento')
                     ->label('Observación')
+                    ->sortable()
                     ->searchable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Creado el')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Actualizado el')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //

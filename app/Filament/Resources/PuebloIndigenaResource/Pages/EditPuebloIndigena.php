@@ -10,6 +10,11 @@ class EditPuebloIndigena extends EditRecord
 {
     protected static string $resource = PuebloIndigenaResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        return PuebloIndigenaResource::getUrl('index');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

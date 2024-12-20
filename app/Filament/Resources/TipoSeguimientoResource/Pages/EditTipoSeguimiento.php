@@ -10,6 +10,11 @@ class EditTipoSeguimiento extends EditRecord
 {
     protected static string $resource = TipoSeguimientoResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        return TipoSeguimientoResource::getUrl('index');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

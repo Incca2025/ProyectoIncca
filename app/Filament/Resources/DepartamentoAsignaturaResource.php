@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Enums\ActionsPosition;
 
 class DepartamentoAsignaturaResource extends Resource
 {
@@ -41,9 +42,11 @@ class DepartamentoAsignaturaResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('CodDepartamento')
                     ->label('Código')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('DesDepartamento')
                     ->label('Descripción del Departamento')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Creado el')
@@ -61,7 +64,7 @@ class DepartamentoAsignaturaResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-            ])
+            ], position: ActionsPosition::BeforeColumns)
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

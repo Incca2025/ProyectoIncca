@@ -77,24 +77,29 @@ class InteresadoResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('Nombres_Int')
                     ->label('Nombres')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('Apellidos_Int')
                     ->label('Apellidos')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('Email_Int')
                     ->label('Correo Electrónico')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('programa.NomProgAcademico')
                     ->label('Programa de interés')
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('Celular_Int')
-                    ->label('Número de Celular'),
+                    ->label('Número de Celular')
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('estados.DesIntEstSeguimiento')
                     ->label('Estado de Seguimiento')
                     ->numeric()
-                    ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Creado el')
                     ->dateTime()

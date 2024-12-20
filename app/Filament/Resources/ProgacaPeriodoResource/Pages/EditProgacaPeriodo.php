@@ -10,6 +10,11 @@ class EditProgacaPeriodo extends EditRecord
 {
     protected static string $resource = ProgacaPeriodoResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        return ProgacaPeriodoResource::getUrl('index');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

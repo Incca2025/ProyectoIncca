@@ -2,17 +2,22 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\PensumResource\Pages;
-use App\Filament\Resources\PensumResource\RelationManagers;
-use App\Models\Pensum;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use App\Models\Pensum;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use App\Models\ProgacaPeriodo;
+use Filament\Resources\Resource;
+use Illuminate\Support\Collection;
+use Filament\Tables\Actions\Action;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Enums\ActionsPosition;
+use App\Filament\Resources\PensumResource\Pages;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\PensumResource\RelationManagers;
 
 class PensumResource extends Resource
 {
@@ -25,21 +30,38 @@ class PensumResource extends Resource
             ->schema([
                 Forms\Components\Select::make('IdProgAcademico')
                     ->relationship('programas', 'NomProgAcademico')
-                    ->label('Programa')
+                    ->searchable()
+                    ->label('Programa Académico')
+                    ->preload()
+                    ->live()
+                    ->afterStateUpdated(function (Set $set) {
+                        $set('perAcademico_Inicial', null); 
+                        $set('perAcademico_Final', null); 
+                    })
                     ->required(),
                 Forms\Components\Select::make('perAcademico_Inicial')
-                    ->relationship('progacaperiodos', 'Peracademico')
                     ->label('Periodo Académico Inicial')
+                    ->options(fn (Get $get): Collection => ProgacaPeriodo::query()
+                        ->where('IdProgAcademico', $get('IdProgAcademico'))
+                        ->pluck('Peracademico', 'IdProgAcaPeriodo'))
+                    ->searchable()
+                    ->preload()
+                    ->live()
                     ->required(),
                 Forms\Components\Select::make('perAcademico_Final')
-                    ->relationship('progacaperiodos', 'Peracademico')
-                    ->label('Periodo Académico Final'),
+                    ->label('Periodo Académico Final')
+                    ->options(fn (Get $get): Collection => ProgacaPeriodo::query()
+                        ->where('IdProgAcademico', $get('IdProgAcademico'))
+                        ->pluck('Peracademico', 'IdProgAcaPeriodo'))
+                    ->searchable()
+                    ->preload()
+                    ->live(),
                 Forms\Components\TextInput::make('desPensum')
                     ->label('Descripción del Pensum')
                     ->required()
                     ->maxLength(40),
                 Forms\Components\TextInput::make('numCredAprob')
-                    ->label('Número de créditos aprobados')
+                    ->label('Número de créditos para aprobación')
                     ->required()
                     ->numeric()
                     ->minValue(1),
@@ -72,32 +94,39 @@ class PensumResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('programas.NomProgAcademico')
                     ->label('Programa')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('perAcademico_Inicial')
-                    ->label('Periodo Académico Inicial')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('progacaperiodos.Peracademico')
+                    ->label('Per. Inicial')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('perAcademico_Final')
-                    ->label('Periodo Académico Final')
+                    ->label('Per. Final')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('desPensum')
-                    ->label('Descripción del Pensum')
+                    ->label('Descripción')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('numCredAprob')
-                    ->label('Número de créditos aprobados')
+                    ->label('Créditos aprobación')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('promMinimo')
-                    ->label('Promedio Mínimo')
+                    ->label('Prom. Mínimo')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('numPeriodos')
-                    ->label('Número de periodos')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('periodos.DesTipPeriodos')
                     ->label('Periodos')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('CodPensum')
+                    ->label('Código')
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Creado el')
                     ->dateTime()
@@ -114,6 +143,9 @@ class PensumResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                // Action::make('Asignaturas')
+                //     ->url(fn (Pensum $record) => PensumDetalleResource::getUrl('index', ['IdPensum' => $record->id]))
+                //     ->icon('heroicon-o-arrow-right')
             ], position: ActionsPosition::BeforeColumns)
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

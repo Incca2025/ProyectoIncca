@@ -10,6 +10,11 @@ class EditZonaResidencia extends EditRecord
 {
     protected static string $resource = ZonaResidenciaResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        return ZonaResidenciaResource::getUrl('index');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

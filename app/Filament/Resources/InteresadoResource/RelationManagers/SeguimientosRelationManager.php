@@ -66,15 +66,22 @@ class SeguimientosRelationManager extends RelationManager
             ->columns([
                 Tables\Columns\TextColumn::make('tipoSeguimiento.DesTipSeguimiento')
                     ->label('Tipo de Contacto')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('ObsIntSeguimiento')
+                    ->label('Observación')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Fecha del Seguimiento')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('ObsIntSeguimiento')
-                    ->label('Observaciones')
-                    ->numeric()
-                    ->sortable(),
+                    ->label('Creado el')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Actualizado el')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //

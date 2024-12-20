@@ -10,6 +10,11 @@ class EditGeneroBiologico extends EditRecord
 {
     protected static string $resource = GeneroBiologicoResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        return GeneroBiologicoResource::getUrl('index');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

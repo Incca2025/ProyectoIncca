@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('progaca_periodo', function (Blueprint $table) {
             $table->id('IdProgAcaPeriodo');
             $table->foreignId('IdProgAcademico')->constrained('progacademico', 'IdProgAcademico');
-            $table->unsignedBigInteger('Peracademico');
+            $table->unsignedInteger('Peracademico');
             $table->unique(['IdProgAcademico', 'Peracademico']);
             $table->decimal('ValMatNuevos', 10, 2);
             $table->date('FecIniInscripciones');

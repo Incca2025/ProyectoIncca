@@ -228,102 +228,135 @@ class PersonaResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('tipoDocumento.DesDocidentidad')
                     ->label('Tipo de Documento')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('NumDocIdentidad')
                     ->label('Documento de Identidad')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('NumDocIdentidad_Num')
                     ->label('Documento de Identidad Númerico')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('PriApellido')
                     ->label('Primer Apellido')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('SegApellido')
                     ->label('Segundo Apellido')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('PriNombre')
                     ->label('Primer Nombre')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('SegNombre')
                     ->label('Segundo Nombre')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('DirResidencia')
                     ->label(label: 'Dirección de Residencia')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('TelResidencia')
                     ->label('Teléfono Residencia')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('MailPersonal')
                     ->label('Correo Electrónico Personal')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('FecNacimiento')
                     ->label('Fecha de Nacimiento')
-                    ->date()
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('TelCelular')
                     ->label('Teléfono Celular')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('paisNacimiento.DesPais')
                     ->label('País de Nacimiento')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('departamentoNacimiento.DesDepartamento')
                     ->label('Departamento de Nacimiento')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('municipioNacimiento.DesMunicipio')
                     ->label('Municipio de Nacimiento')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('OtroDeptoNacimiento')
                     ->label('Otro Departamento de Nacimiento')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('OtroMunNacimiento')
                     ->label('Otro Municipio de Nacimiento')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('paisResidencia.DesPais')
                     ->label('País de Residencia')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('departamentoResidencia.DesDepartamento')
                     ->label('Departamento de Residencia')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('municipioResidencia.DesMunicipio')
                     ->label('Municipio de Residencia')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('OtroDeptoResidencia')
                     ->label('Otro Departamento de Residencia')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('OtroMunResidencia')
                     ->label('Otro Municipio de Residencia')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('DocExpedidoEn')
                     ->label('Documento de Identidad Expedido en')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('Nacionalidad')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('capacidadExcepcional.DesCapExcepcional')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('comunidadNegra.DesComNegra')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('conDiscapacidad.DesConDiscapacidad')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('discapacidad.DesDiscapacidad')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('estadoCivil.DesEstCivil')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('estrato.DesEstrato')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('generoBiologico.DesGenBiologico')
                     ->label('Género Biológico')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('grupoEtnico.DesGrupEtnico')
                     ->label('Grupo Étnico')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('puebloIndigena.DesPueIndigena')
                     ->label('Pueblo Indígena')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('leyVeteranos.DesVeterano')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('zonaResidencia.DesZonaResidencial')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Creado el')
                     ->dateTime()

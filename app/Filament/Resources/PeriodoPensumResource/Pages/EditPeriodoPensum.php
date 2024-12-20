@@ -10,6 +10,11 @@ class EditPeriodoPensum extends EditRecord
 {
     protected static string $resource = PeriodoPensumResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        return PeriodoPensumResource::getUrl('index');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

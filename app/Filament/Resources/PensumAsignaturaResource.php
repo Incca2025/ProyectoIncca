@@ -2,17 +2,24 @@
 
 namespace App\Filament\Resources;
 
+use Filament\Forms;
+use Filament\Tables;
+use App\Models\Pensum;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
+use App\Models\PensumAsignatura;
+use Filament\Resources\Resource;
+use App\Models\ProgramaAcademico;
+use Illuminate\Support\Collection;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\Filter;
+use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Enums\ActionsPosition;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\PensumAsignaturaResource\Pages;
 use App\Filament\Resources\PensumAsignaturaResource\RelationManagers;
-use App\Models\PensumAsignatura;
-use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Tables\Enums\ActionsPosition;
 
 class PensumAsignaturaResource extends Resource
 {
@@ -24,76 +31,127 @@ class PensumAsignaturaResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('IdPensum')
-                    ->relationship('pensum', 'desPensum')
-                    ->label(label: 'Pensum')
-                    ->required(),
-                Forms\Components\TextInput::make('numPeriodo')
-                    ->label('Número de periodo')
-                    ->required()
-                    ->numeric()
-                    ->default(1)
-                    ->minValue(1),
-                Forms\Components\Select::make('IdAsignatura')
-                    ->relationship('asignaturas', 'DesAsignatura')
-                    ->label(label: 'Asignatura')
-                    ->required(),
-                Forms\Components\TextInput::make('Electiva')
-                    ->label('Electiva')
-                    ->required()
-                    ->numeric()
-                    ->default(0)
-                    ->minValue(0),
-                Forms\Components\TextInput::make('numCreditos')
-                    ->label(label: 'Número de créditos')
-                    ->required()
-                    ->numeric()
-                    ->default(0)
-                    ->minValue(0),
-                Forms\Components\TextInput::make('NumCreditosPreRequisito')
-                    ->label('Número de créditos pre-requisito')
-                    ->required()
-                    ->numeric()
-                    ->default(0)
-                    ->minValue(0),
-                Forms\Components\TextInput::make('NumHorClase')
-                    ->label('Número de horas de clase')
-                    ->required()
-                    ->numeric()
-                    ->minValue(0),
-            ]);
+                Forms\Components\Fieldset::make('Programas Académicos y Pensum')
+                    ->schema([
+                        Forms\Components\Select::make('IdProgAcademico')
+                            ->label('Programa Académico')
+                            ->options(fn () => ProgramaAcademico::pluck('NomProgAcademico', 'IdProgAcademico'))
+                            ->searchable()
+                            ->preload()
+                            ->live()
+                            ->dehydrated(false)
+                            ->afterStateUpdated(function (Set $set, Get $get) {
+                                $set('IdPensum', null); 
+                                $set('IdAsignatura', null); 
+                                $set('hasPensum', Pensum::where('IdProgAcademico', $get('IdProgAcademico'))->exists());
+                            })
+                            ->afterStateHydrated(function (Set $set, Get $get) {
+                                if ($get('IdPensum')) {
+                                    $pensum = Pensum::find($get('IdPensum'));
+                                    $set('IdProgAcademico', $pensum?->IdProgAcademico);
+                                }
+                            })
+                            ->required(),
+                        Forms\Components\Select::make('IdPensum')
+                            ->label(label: 'Pensum')
+                            ->options(fn (Get $get): Collection => Pensum::query()
+                                ->where('IdProgAcademico', $get('IdProgAcademico'))
+                                ->pluck('desPensum', 'IdPensum'))
+                            ->searchable()
+                            ->preload()
+                            ->live()
+                            ->required(),
+                    ]),
+                Forms\Components\Fieldset::make('Datos de la Asignatura')
+                    ->schema([
+                        Forms\Components\Select::make('IdAsignatura')
+                            ->relationship('asignaturas', 'DesAsignatura')
+                            ->label(label: 'Asignatura')
+                            ->searchable()
+                            ->preload()
+                            ->disabled(fn (Get $get) => !$get('hasPensum'))
+                            ->required(),
+                        Forms\Components\TextInput::make('numPeriodo')
+                            ->label('Número de periodo')
+                            ->numeric()
+                            ->default(1)
+                            ->minValue(1)
+                            ->disabled(fn (Get $get) => !$get('hasPensum'))
+                            ->required(),
+                        Forms\Components\Select::make('Electiva')
+                            ->label('Electiva')
+                            ->options([
+                                0 => 'No',
+                                1 => 'Si',
+                            ])
+                            ->default(0)
+                            ->disabled(fn (Get $get) => !$get('hasPensum'))
+                            ->required(),
+                        Forms\Components\TextInput::make('numCreditos')
+                            ->label(label: 'Número de créditos')
+                            ->numeric()
+                            ->default(0)
+                            ->disabled(fn (Get $get) => !$get('hasPensum'))
+                            ->minValue(0)
+                            ->required(),
+                        Forms\Components\TextInput::make('NumCreditosPreRequisito')
+                            ->label('Número de créditos pre-requisito')
+                            ->numeric()
+                            ->default(0)
+                            ->minValue(0)
+                            ->disabled(fn (Get $get) => !$get('hasPensum'))
+                            ->required(),
+                        Forms\Components\TextInput::make('NumHorClase')
+                            ->label('Número de horas de clase por semana')
+                            ->numeric()
+                            ->minValue(0)
+                            ->disabled(fn (Get $get) => !$get('hasPensum'))
+                            ->required(),
+                    ]),
+            ]);     
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('pensum.programas.NomProgAcademico')
+                    ->label(label: 'Programa Académico')
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('pensum.desPensum')
                     ->label(label: 'Pensum')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('numPeriodo')
                     ->label('Número de periodo')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('asignaturas.DesAsignatura')
                     ->label(label: 'Asignatura')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('Electiva')
                     ->label('Electiva')
-                    ->numeric()
-                    ->sortable(),
+                    ->formatStateUsing(fn ($state) => $state === 0 ? 'No' : 'Si')
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('numCreditos')
-                    ->label(label: 'Número de créditos')
+                    ->label(label: 'Créditos')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('NumCreditosPreRequisito')
-                    ->label(label: 'Número de créditos pre-requisito')
+                    ->label(label: 'Cred. pre-requisito')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('NumHorClase')
-                    ->label(label: 'Número de horas de clase')
+                    ->label(label: 'Int Semanal')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Creado el')
                     ->dateTime()
@@ -106,7 +164,29 @@ class PensumAsignaturaResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                SelectFilter::make('IdProgAcademico')
+                    ->relationship('pensum.programas', 'NomProgAcademico')
+                    ->label('Programa Académico')
+                    ->searchable()
+                    ->preload(),
+                SelectFilter::make('IdPensum')
+                    ->relationship('pensum', 'desPensum')
+                    ->label('Pensum')
+                    ->searchable()
+                    ->preload(),
+                Filter::make('numPeriodo')
+                    ->label('Número de Periodo')
+                    ->form([
+                        Forms\Components\TextInput::make('numPeriodo')
+                            ->numeric()
+                            ->label('Número de Periodo'),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query->when(
+                            isset($data['numPeriodo']), 
+                            fn ($q) => $q->where('numPeriodo', $data['numPeriodo'])
+                        );
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

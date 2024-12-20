@@ -10,6 +10,11 @@ class EditConDiscapacidad extends EditRecord
 {
     protected static string $resource = ConDiscapacidadResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        return ConDiscapacidadResource::getUrl('index');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

@@ -10,6 +10,11 @@ class EditEstrato extends EditRecord
 {
     protected static string $resource = EstratoResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        return EstratoResource::getUrl('index');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

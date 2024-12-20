@@ -10,4 +10,17 @@ class CreatePersona extends CreateRecord
 {
     protected static string $resource = PersonaResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        return PersonaResource::getUrl('index');
+    }
+
+    protected function getFormActions(): array
+    {
+        return [
+            $this->getCreateFormAction(),
+            $this->getCancelFormAction(),
+        ];
+    }
+
 }

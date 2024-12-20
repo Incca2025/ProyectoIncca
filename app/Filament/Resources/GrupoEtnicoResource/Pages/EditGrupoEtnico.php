@@ -10,6 +10,11 @@ class EditGrupoEtnico extends EditRecord
 {
     protected static string $resource = GrupoEtnicoResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        return GrupoEtnicoResource::getUrl('index');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

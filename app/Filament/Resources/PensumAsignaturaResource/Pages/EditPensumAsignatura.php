@@ -10,6 +10,11 @@ class EditPensumAsignatura extends EditRecord
 {
     protected static string $resource = PensumAsignaturaResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        return PensumAsignaturaResource::getUrl('index');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

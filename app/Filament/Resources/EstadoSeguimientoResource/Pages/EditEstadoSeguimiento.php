@@ -10,6 +10,11 @@ class EditEstadoSeguimiento extends EditRecord
 {
     protected static string $resource = EstadoSeguimientoResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        return EstadoSeguimientoResource::getUrl('index');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

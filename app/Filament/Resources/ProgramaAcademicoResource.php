@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Enums\ActionsPosition;
 
 class ProgramaAcademicoResource extends Resource
 {
@@ -76,29 +77,37 @@ class ProgramaAcademicoResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('NomProgAcademico')
                     ->label('Nombre del Programa Académico')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('CodProgAcademico')
                     ->label('Código del Programa Académico')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('nivel.DesPrograma')
                     ->label('Nivel del Programa Académico')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('NumPeriodos')
                     ->label('Número de Periodos Académicos')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('periodo.DesTipPeriodos')
                     ->label('Periodo Académico')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('Snies')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('ResMen')
                     ->label('Resolución')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('FecResMen')
                     ->label('Fecha de la Resolución')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Creado el')
@@ -116,7 +125,7 @@ class ProgramaAcademicoResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-            ])
+            ], position: ActionsPosition::BeforeColumns)
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

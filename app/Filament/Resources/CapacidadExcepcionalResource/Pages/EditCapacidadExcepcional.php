@@ -10,6 +10,11 @@ class EditCapacidadExcepcional extends EditRecord
 {
     protected static string $resource = CapacidadExcepcionalResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        return CapacidadExcepcionalResource::getUrl('index');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

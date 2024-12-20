@@ -18,6 +18,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Collection;
+use Filament\Tables\Enums\ActionsPosition;
 
 class EstudianteResource extends Resource
 {
@@ -238,16 +239,20 @@ class EstudianteResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('IdPersona')
                     ->label('Id del Estudiante')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('CodEstudiante')
                     ->label('Código del Estudiante')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('EmailEstudiante')
                     ->label('Correo electrónico del Estudiante')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('estud_estados.DesEstEstudiante')
                     ->label('Estado del Estudiante')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Creado el')
                     ->dateTime()
@@ -264,7 +269,7 @@ class EstudianteResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-            ])
+            ], position: ActionsPosition::BeforeColumns)
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

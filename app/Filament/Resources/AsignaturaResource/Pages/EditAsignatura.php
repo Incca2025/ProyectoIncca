@@ -10,6 +10,11 @@ class EditAsignatura extends EditRecord
 {
     protected static string $resource = AsignaturaResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        return AsignaturaResource::getUrl('index');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

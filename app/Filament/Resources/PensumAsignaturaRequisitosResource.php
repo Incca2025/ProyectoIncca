@@ -2,16 +2,18 @@
 
 namespace App\Filament\Resources;
 
+use Filament\Forms;
+use Filament\Tables;
+use App\Models\Pensum;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Illuminate\Database\Eloquent\Builder;
+use App\Models\PensumAsignaturaRequisitos;
+use Filament\Tables\Enums\ActionsPosition;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\PensumAsignaturaRequisitosResource\Pages;
 use App\Filament\Resources\PensumAsignaturaRequisitosResource\RelationManagers;
-use App\Models\PensumAsignaturaRequisitos;
-use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PensumAsignaturaRequisitosResource extends Resource
 {
@@ -24,19 +26,26 @@ class PensumAsignaturaRequisitosResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('IdPen_Asignatura') 
-                    ->relationship('pensumasignatura', 'IdPensum')
+                    // ->relationship('pensumasignatura.pensum', 'DesPensum')
                     ->label(label: 'Pensum')
+                    ->options(fn () => Pensum::pluck('desPensum', 'IdPensum'))
+                    ->searchable()
+                    ->preload()
                     ->required(),
                 Forms\Components\Select::make('IdAsignatura')
                     ->relationship('asignaturas', 'DesAsignatura')
                     ->label(label: 'Asignatura')
+                    ->searchable()
+                    ->preload()
                     ->required(),
-                Forms\Components\TextInput::make('Prerequisito')
-                    ->label(label: 'Pre-requisito')
-                    ->required()
-                    ->numeric()
+                Forms\Components\Select::make('Prerequisito')
+                    ->label(label: 'Tipo de Requisito')
+                    ->options([
+                        0 => 'Prerequisito',
+                        1 => 'Correquisito',
+                    ])
                     ->default(0)
-                    ->minValue(0),
+                    ->required(),
             ]);
     }
 
@@ -44,16 +53,19 @@ class PensumAsignaturaRequisitosResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('pensumasignatura.IdPensum')
+                Tables\Columns\TextColumn::make('pensumasignatura.pensum.desPensum')
                     ->label(label: 'Pensum')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('asignaturas.DesAsignatura')
                     ->label(label: 'Asignatura')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('Prerequisito')
-                    ->label(label: 'Pre-requisito')
-                    ->numeric()
-                    ->sortable(),
+                    ->label(label: 'Tipo de Requisito')
+                    ->formatStateUsing(fn ($state) => $state === 0 ? 'Prerequisito' : 'Correquisito')
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Creado el')
                     ->dateTime()
@@ -70,7 +82,7 @@ class PensumAsignaturaRequisitosResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-            ])
+            ], position: ActionsPosition::BeforeColumns)
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

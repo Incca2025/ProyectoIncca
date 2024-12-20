@@ -11,11 +11,12 @@ use Illuminate\Validation\Rule;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Section;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Enums\ActionsPosition;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\ProgacaPeriodoResource\Pages;
 use App\Filament\Resources\ProgacaPeriodoResource\RelationManagers;
-use Filament\Tables\Enums\ActionsPosition;
 
 class ProgacaPeriodoResource extends Resource
 {
@@ -35,11 +36,15 @@ class ProgacaPeriodoResource extends Resource
                     Forms\Components\Select::make('IdProgAcademico')
                         ->relationship('programaAcademico', 'NomProgAcademico')
                         ->label('Programa Académico')
+                        ->searchable()
+                        ->preload()
+                        ->disabled(fn (string $operation): bool => $operation === 'edit')
                         ->required(),
                     Forms\Components\TextInput::make('Peracademico')
                         ->label('Periodo Académico')
                         ->required()
                         ->minValue(1)
+                        ->disabled(fn (string $operation): bool => $operation === 'edit')
                         // ->rule(function () {
                         //     return Rule::unique('progaca_periodo') // Tabla de tu base de datos
                         //         ->where('IdProgAcademico', request()->input('IdProgAcademico'))
@@ -84,38 +89,41 @@ class ProgacaPeriodoResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('programaAcademico.NomProgAcademico')
                     ->label('Programa Académico')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('Peracademico')
                     ->label('Periodo Académico')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('ValMatNuevos')
                     ->label('Valor de matrículas estudiantes nuevos')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('FecIniInscripciones')
                     ->label('Fecha inicial de inscripciones')
-                    ->date()
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('FecFinInscripciones')
                     ->label('Fecha final de inscripciones')
-                    ->date()
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('FecIniMatriculas')
-                    ->label('Fecha inicial de matrículas')	
-                    ->date()
-                    ->sortable(),
+                    ->label('Fecha inicial de matrículas')
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('FecFinMatriculas')
-                    ->label('Fecha final de matrículas')	
-                    ->date()
-                    ->sortable(),
+                    ->label('Fecha final de matrículas')
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('FecIniClases')
                     ->label('Fecha inicial de clases')
-                    ->date()
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('FecFinClases')
                     ->label('Fecha final de clases')
-                    ->date()
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Creado el')
                     ->dateTime()
@@ -128,7 +136,11 @@ class ProgacaPeriodoResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                SelectFilter::make('IdProgAcademico')
+                    ->relationship('programaAcademico', 'NomProgAcademico')
+                    ->label('Programa Académico')
+                    ->searchable()
+                    ->preload(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

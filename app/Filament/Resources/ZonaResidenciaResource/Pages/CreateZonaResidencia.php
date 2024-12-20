@@ -9,4 +9,18 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateZonaResidencia extends CreateRecord
 {
     protected static string $resource = ZonaResidenciaResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        return ZonaResidenciaResource::getUrl('index');
+    }
+
+    protected function getFormActions(): array
+    {
+        return [
+            $this->getCreateFormAction(),
+            $this->getCancelFormAction(),
+        ];
+    }
+
 }

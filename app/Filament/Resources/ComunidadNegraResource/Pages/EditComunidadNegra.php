@@ -10,6 +10,11 @@ class EditComunidadNegra extends EditRecord
 {
     protected static string $resource = ComunidadNegraResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        return ComunidadNegraResource::getUrl('index');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

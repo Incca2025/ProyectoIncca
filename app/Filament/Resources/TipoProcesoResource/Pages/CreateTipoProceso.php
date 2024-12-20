@@ -9,4 +9,18 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateTipoProceso extends CreateRecord
 {
     protected static string $resource = TipoProcesoResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        return TipoProcesoResource::getUrl('index');
+    }
+
+    protected function getFormActions(): array
+    {
+        return [
+            $this->getCreateFormAction(),
+            $this->getCancelFormAction(),
+        ];
+    }
+
 }

@@ -9,4 +9,18 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateProgramaAcademico extends CreateRecord
 {
     protected static string $resource = ProgramaAcademicoResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        return ProgramaAcademicoResource::getUrl('index');
+    }
+
+    protected function getFormActions(): array
+    {
+        return [
+            $this->getCreateFormAction(),
+            $this->getCancelFormAction(),
+        ];
+    }
+
 }
