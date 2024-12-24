@@ -10,6 +10,7 @@ use Filament\Forms\Set;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use App\Models\ProgacaPeriodo;
+use Illuminate\Validation\Rules\Unique;
 use Filament\Resources\Resource;
 use Illuminate\Support\Collection;
 use Filament\Tables\Actions\Action;
@@ -22,6 +23,15 @@ use App\Filament\Resources\PensumResource\RelationManagers;
 class PensumResource extends Resource
 {
     protected static ?string $model = Pensum::class;
+
+    // protected static ?string $navigationLabel = 'Pensums';
+
+    // protected static ?string $modelLabel = 'Personas';
+
+    protected static ?string $navigationGroup = 'Programas Académicos';
+
+    protected static ?int $navigationSort = 4;
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
@@ -79,8 +89,16 @@ class PensumResource extends Resource
                     ->minValue(1),
                 Forms\Components\TextInput::make('CodPensum')
                     ->label('Código del Pensum')
-                    ->required()
-                    ->maxLength(15),
+                    ->maxLength(15)
+                    ->unique(
+                        modifyRuleUsing: function (Unique $rule, $livewire) {
+                            return $rule->where('IdProgAcademico', $livewire->data['IdProgAcademico'] ?? null);
+                        }
+                    )
+                    ->validationMessages([
+                        'unique' => 'La combinación de Programa Académico y Código del Pensum ya existe.',
+                    ])
+                    ->required(),
                 Forms\Components\Select::make('IdTipPeriodos')
                     ->relationship('periodos', 'DesTipPeriodos')
                     ->label('Periodos')
@@ -143,6 +161,10 @@ class PensumResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Action::make('verPensumAsignaturas')
+                    ->label('Pensum Asignaturas')
+                    ->url(fn () => PensumAsignaturaResource::getUrl('index'))
+                    ->icon('heroicon-o-arrow-right'),
                 // Action::make('Asignaturas')
                 //     ->url(fn (Pensum $record) => PensumDetalleResource::getUrl('index', ['IdPensum' => $record->id]))
                 //     ->icon('heroicon-o-arrow-right')

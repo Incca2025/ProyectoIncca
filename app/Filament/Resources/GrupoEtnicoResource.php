@@ -24,7 +24,7 @@ class GrupoEtnicoResource extends Resource
 
     protected static ?string $navigationGroup = 'Datos';
 
-    protected static ?int $navigationSort = 19;
+    protected static ?int $navigationSort = 24;
 
     protected static ?string $navigationIcon = 'heroicon-o-globe-americas';
 

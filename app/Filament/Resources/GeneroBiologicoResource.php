@@ -24,7 +24,7 @@ class GeneroBiologicoResource extends Resource
 
     protected static ?string $navigationGroup = 'Datos';
 
-    protected static ?int $navigationSort = 18;
+    protected static ?int $navigationSort = 23;
 
     protected static ?string $navigationIcon = 'heroicon-o-hand-thumb-up';
 

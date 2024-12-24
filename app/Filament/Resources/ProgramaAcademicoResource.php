@@ -2,17 +2,18 @@
 
 namespace App\Filament\Resources;
 
+use Filament\Forms;
+use Filament\Tables;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use App\Models\ProgramaAcademico;
+use Filament\Tables\Actions\Action;
+use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Enums\ActionsPosition;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\ProgramaAcademicoResource\Pages;
 use App\Filament\Resources\ProgramaAcademicoResource\RelationManagers;
-use App\Models\ProgramaAcademico;
-use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Tables\Enums\ActionsPosition;
 
 class ProgramaAcademicoResource extends Resource
 {
@@ -22,9 +23,9 @@ class ProgramaAcademicoResource extends Resource
 
     protected static ?string $modelLabel = 'Programas Académicos';
 
-    protected static ?string $navigationGroup = 'Académicos';
+    protected static ?string $navigationGroup = 'Programas Académicos';
 
-    protected static ?int $navigationSort = 6;
+    protected static ?int $navigationSort = 3;
 
     protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
 
@@ -125,6 +126,10 @@ class ProgramaAcademicoResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Action::make('verProgramaAcademicoPeriodos')
+                    ->label('Periodos')
+                    ->url(fn () => ProgacaPeriodoResource::getUrl('index'))
+                    ->icon('heroicon-o-arrow-right'),
             ], position: ActionsPosition::BeforeColumns)
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

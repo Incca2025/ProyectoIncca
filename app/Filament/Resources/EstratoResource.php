@@ -24,7 +24,7 @@ class EstratoResource extends Resource
     
     protected static ?string $navigationGroup = 'Datos';
 
-    protected static ?int $navigationSort = 17;
+    protected static ?int $navigationSort = 22;
 
     protected static ?string $navigationIcon = 'heroicon-o-currency-dollar';
 

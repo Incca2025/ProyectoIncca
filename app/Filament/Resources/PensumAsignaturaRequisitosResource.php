@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use Filament\Forms;
 use Filament\Tables;
 use App\Models\Pensum;
+use Illuminate\Validation\Rules\Unique;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
@@ -37,6 +38,14 @@ class PensumAsignaturaRequisitosResource extends Resource
                     ->label(label: 'Asignatura')
                     ->searchable()
                     ->preload()
+                    ->unique(
+                        modifyRuleUsing: function (Unique $rule, $livewire) {
+                            return $rule->where('IdPen_Asignatura', $livewire->data['IdPen_Asignatura'] ?? null);
+                        }
+                    )
+                    ->validationMessages([
+                        'unique' => 'La combinación del Pensum y de la Asignatura ya existe.',
+                    ])
                     ->required(),
                 Forms\Components\Select::make('Prerequisito')
                     ->label(label: 'Tipo de Requisito')
@@ -105,4 +114,10 @@ class PensumAsignaturaRequisitosResource extends Resource
             'edit' => Pages\EditPensumAsignaturaRequisitos::route('/{record}/edit'),
         ];
     }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false;
+    }
+    
 }

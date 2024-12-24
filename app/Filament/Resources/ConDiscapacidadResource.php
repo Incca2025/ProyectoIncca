@@ -24,7 +24,7 @@ class ConDiscapacidadResource extends Resource
 
     protected static ?string $navigationGroup = 'Datos';
 
-    protected static ?int $navigationSort = 14;
+    protected static ?int $navigationSort = 19;
 
     protected static ?string $navigationIcon = 'heroicon-o-document-duplicate';
 

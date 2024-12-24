@@ -7,6 +7,7 @@ use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use App\Models\ProgacaPeriodo;
+use Illuminate\Validation\Rules\Unique;
 use Illuminate\Validation\Rule;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Group;
@@ -45,6 +46,14 @@ class ProgacaPeriodoResource extends Resource
                         ->required()
                         ->minValue(1)
                         ->disabled(fn (string $operation): bool => $operation === 'edit')
+                        ->unique(
+                            modifyRuleUsing: function (Unique $rule, $livewire) {
+                                return $rule->where('IdProgAcademico', $livewire->data['IdProgAcademico'] ?? null);
+                            }
+                        )
+                        ->validationMessages([
+                            'unique' => 'La combinación de Programa Académico y Período Académico ya existe.',
+                        ])
                         // ->rule(function () {
                         //     return Rule::unique('progaca_periodo') // Tabla de tu base de datos
                         //         ->where('IdProgAcademico', request()->input('IdProgAcademico'))
@@ -167,4 +176,10 @@ class ProgacaPeriodoResource extends Resource
             'edit' => Pages\EditProgacaPeriodo::route('/{record}/edit'),
         ];
     }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false;
+    }
+    
 }

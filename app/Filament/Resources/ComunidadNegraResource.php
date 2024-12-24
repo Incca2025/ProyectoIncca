@@ -24,7 +24,7 @@ class ComunidadNegraResource extends Resource
 
     protected static ?string $navigationGroup = 'Datos';
 
-    protected static ?int $navigationSort = 13;
+    protected static ?int $navigationSort = 18;
 
     protected static ?string $navigationIcon = 'heroicon-o-face-smile';
 

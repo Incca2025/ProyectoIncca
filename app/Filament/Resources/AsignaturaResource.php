@@ -20,6 +20,8 @@ class AsignaturaResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static bool $shouldRegisterNavigation = false;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -95,4 +97,10 @@ class AsignaturaResource extends Resource
             'edit' => Pages\EditAsignatura::route('/{record}/edit'),
         ];
     }
+
+    // public static function shouldRegisterNavigation(): bool
+    // {
+    //     return false;
+    // }
+
 }

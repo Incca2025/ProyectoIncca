@@ -24,7 +24,7 @@ class EstadoCivilResource extends Resource
 
     protected static ?string $navigationGroup = 'Datos';
 
-    protected static ?int $navigationSort = 16;
+    protected static ?int $navigationSort = 21;
 
     protected static ?string $navigationIcon = 'heroicon-o-heart';
 

@@ -29,7 +29,7 @@ class PersonaResource extends Resource
 
     protected static ?string $navigationGroup = 'Personas';
 
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 12;
 
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
 

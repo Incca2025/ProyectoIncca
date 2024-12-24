@@ -18,6 +18,10 @@ class TipoProcesoResource extends Resource
 {
     protected static ?string $model = TipoProceso::class;
 
+    protected static ?string $navigationGroup = 'Académicos';
+
+    protected static ?int $navigationSort = 9;
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form

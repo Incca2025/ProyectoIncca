@@ -24,7 +24,7 @@ class EstadoSeguimientoResource extends Resource
 
     protected static ?string $navigationGroup = 'Seguimientos';
 
-    protected static ?int $navigationSort = 11;
+    protected static ?int $navigationSort = 16;
 
     protected static ?string $navigationIcon = 'heroicon-o-bell';
 

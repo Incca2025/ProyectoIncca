@@ -24,7 +24,7 @@ class TipoSeguimientoResource extends Resource
 
     protected static ?string $navigationGroup = 'Seguimientos';
 
-    protected static ?int $navigationSort = 10;
+    protected static ?int $navigationSort = 15;
 
     protected static ?string $navigationIcon = 'heroicon-o-folder-open';
 

@@ -23,7 +23,7 @@ class CapacidadExcepcionalResource extends Resource
 
     protected static ?string $navigationGroup = 'Datos';
 
-    protected static ?int $navigationSort = 12;
+    protected static ?int $navigationSort = 17;
 
     protected static ?string $navigationIcon = 'heroicon-o-rocket-launch';
 

@@ -9,6 +9,7 @@ use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Tables\Actions\Action;
 use App\Models\PensumAsignatura;
 use Filament\Resources\Resource;
 use App\Models\ProgramaAcademico;
@@ -190,6 +191,10 @@ class PensumAsignaturaResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Action::make('verPensumRequisitos')
+                    ->label('Requisitos')
+                    ->url(fn () => PensumAsignaturaRequisitosResource::getUrl('index'))
+                    ->icon('heroicon-o-arrow-right'),
             ], position: ActionsPosition::BeforeColumns)
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -213,4 +218,10 @@ class PensumAsignaturaResource extends Resource
             'edit' => Pages\EditPensumAsignatura::route('/{record}/edit'),
         ];
     }
+    
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false;
+    }
+
 }

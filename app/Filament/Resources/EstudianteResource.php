@@ -24,6 +24,10 @@ class EstudianteResource extends Resource
 {
     protected static ?string $model = Estudiante::class;
 
+    protected static ?string $navigationGroup = 'Académicos';
+
+    protected static ?int $navigationSort = 6;
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form

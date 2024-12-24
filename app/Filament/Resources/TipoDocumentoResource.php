@@ -24,7 +24,7 @@ class TipoDocumentoResource extends Resource
 
     protected static ?string $navigationGroup = 'Datos';
 
-    protected static ?int $navigationSort = 22;
+    protected static ?int $navigationSort = 27;
 
     protected static ?string $navigationIcon = 'heroicon-o-identification';
 

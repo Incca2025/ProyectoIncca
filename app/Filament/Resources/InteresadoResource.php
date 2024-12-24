@@ -25,7 +25,7 @@ class InteresadoResource extends Resource
 
     protected static ?string $navigationGroup = 'Personas';
 
-    protected static ?int $navigationSort = 5;
+    protected static ?int $navigationSort = 13;
 
     protected static ?string $navigationIcon = 'heroicon-o-user';
 

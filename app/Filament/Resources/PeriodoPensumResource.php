@@ -18,6 +18,10 @@ class PeriodoPensumResource extends Resource
 {
     protected static ?string $model = PeriodoPensum::class;
 
+    protected static ?string $navigationGroup = 'Académicos';
+
+    protected static ?int $navigationSort = 8;
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form

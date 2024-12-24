@@ -10,6 +10,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Tables\Actions\Action;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Enums\ActionsPosition;
@@ -17,6 +18,10 @@ use Filament\Tables\Enums\ActionsPosition;
 class DepartamentoAsignaturaResource extends Resource
 {
     protected static ?string $model = DepartamentoAsignatura::class;
+
+    protected static ?string $navigationGroup = 'Programas Académicos';
+
+    protected static ?int $navigationSort = 2;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -64,6 +69,10 @@ class DepartamentoAsignaturaResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Action::make('verAsignaturas')
+                    ->label('Asignaturas')
+                    ->url(fn () => AsignaturaResource::getUrl('index'))
+                    ->icon('heroicon-o-arrow-right'),
             ], position: ActionsPosition::BeforeColumns)
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

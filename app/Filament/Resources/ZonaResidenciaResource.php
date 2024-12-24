@@ -24,7 +24,7 @@ class ZonaResidenciaResource extends Resource
 
     protected static ?string $navigationGroup = 'Datos';
 
-    protected static ?int $navigationSort = 23;
+    protected static ?int $navigationSort = 28;
 
     protected static ?string $navigationIcon = 'heroicon-o-home-modern';
 

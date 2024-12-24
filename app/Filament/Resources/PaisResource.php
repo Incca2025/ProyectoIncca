@@ -24,7 +24,7 @@ class PaisResource extends Resource
 
     protected static ?string $navigationGroup = 'País/Departamento/Municipio';
 
-    protected static ?int $navigationSort = 24;
+    protected static ?int $navigationSort = 29;
 
     protected static ?string $navigationIcon = 'heroicon-o-flag';
 

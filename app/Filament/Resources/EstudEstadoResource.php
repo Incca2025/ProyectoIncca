@@ -18,6 +18,10 @@ class EstudEstadoResource extends Resource
 {
     protected static ?string $model = EstudEstado::class;
 
+    protected static ?string $navigationGroup = 'Académicos';
+
+    protected static ?int $navigationSort = 5;
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form

@@ -24,7 +24,7 @@ class MunicipioResource extends Resource
 
     protected static ?string $navigationGroup = 'País/Departamento/Municipio';
 
-    protected static ?int $navigationSort = 26;
+    protected static ?int $navigationSort = 31;
 
     protected static ?string $navigationIcon = 'heroicon-o-building-office-2';
 
